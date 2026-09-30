@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ledgerly — Driftwood Coffee Co. · The Statements</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2C8 7 5 10 5 14a7 7 0 0 0 14 0c0-4-3-7-7-12Z' fill='%2321303F'/%3E%3Ccircle cx='12' cy='14' r='1.8' fill='%232E7C6A'/%3E%3C/svg%3E">
+<script>try{if(localStorage.getItem('lgly-theme')==='dark')document.documentElement.dataset.theme='dark'}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Schibsted+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F6F1E4; --paper-raised:#FCFAF2; --paper-high:#FFFEF9; --paper-sunken:#EFE8D6;
+  --rule:#E2D8BF; --rule-soft:#EAE2CD; --rule-firm:#CDBF9E;
+  --ink:#21303F; --ink-2:#4C5B6D; --ink-3:#6F7C8B; --ink-4:#B3BBC6;
+  --jade:#2E7C6A; --jade-deep:#235F52; --jade-wash:#E3EEE6;
+  --redink:#B8432F; --redink-wash:#F6E5E0;
+  --brass:#A0782B; --brass-wash:#F2E8CE;
+  --display:'Fraunces',Georgia,serif;--body:'Schibsted Grotesk',sans-serif;--figures:'Spline Sans Mono',monospace;
+  --shadow-1:0 1px 2px rgba(63,48,18,.05),0 2px 8px rgba(63,48,18,.05);
+  --shadow-2:0 2px 4px rgba(63,48,18,.06),0 10px 28px rgba(63,48,18,.09);
+}
+[data-theme="dark"]{
+  --paper:#14181F; --paper-raised:#1B212A; --paper-high:#232B36; --paper-sunken:#10141A;
+  --rule:#2B3440; --rule-soft:#242C37; --rule-firm:#3B4757;
+  --ink:#E9E4D6; --ink-2:#B0AA9B; --ink-3:#7E7A6E; --ink-4:#54514A;
+  --jade:#4DA08C; --jade-deep:#7FC4B1; --jade-wash:rgba(77,160,140,.16);
+  --redink:#D06A57; --redink-wash:rgba(208,106,87,.14);
+  --brass:#C49A4A; --brass-wash:rgba(196,154,74,.16);
+  --shadow-1:0 0 0 1px rgba(0,0,0,.25); --shadow-2:0 4px 16px rgba(0,0,0,.35);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.5;min-height:100vh;
+  background-image:radial-gradient(ellipse 80% 50% at 50% -10%, rgba(255,254,247,.8), transparent);transition:background .3s,color .3s}
+[data-theme="dark"] body{background-image:radial-gradient(ellipse 80% 50% at 50% -10%, rgba(77,160,140,.06), transparent)}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23g)' opacity='0.08'/%3E%3C/svg%3E");mix-blend-mode:multiply;opacity:.5}
+[data-theme="dark"] body::after{opacity:.16}
+::selection{background:var(--jade-wash);color:var(--jade-deep)}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+a{color:inherit;text-decoration:none}
+input,select{font-family:inherit;color:inherit}
+
+.spine{max-width:1180px;margin:0 auto;padding:18px 28px;display:flex;align-items:center;gap:16px;border-bottom:1px solid var(--rule-soft)}
+.back{display:flex;align-items:center;gap:8px;font-size:.84rem;font-weight:500;color:var(--ink-3);padding:7px 12px;border-radius:99px;transition:.18s}
+.back:hover{background:var(--paper-sunken);color:var(--ink)}
+.spine h1{font-family:var(--display);font-weight:600;font-size:1.1rem}
+.spine .right{margin-left:auto;display:flex;gap:12px;align-items:center}
+.theme-btn{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;color:var(--ink-2);border:1px solid var(--rule);transition:.18s;flex:none}
+.theme-btn:hover{background:var(--paper-sunken);color:var(--ink)}
+.theme-btn .sun{display:none}
+[data-theme="dark"] .theme-btn .sun{display:block}
+[data-theme="dark"] .theme-btn .moon{display:none}
+
+.sheet{max-width:1180px;margin:0 auto;padding:42px 28px 80px}
+.s-head{margin-bottom:26px;animation:rise .6s cubic-bezier(.2,.7,.2,1) both}
+.s-head .eyebrow{font-family:var(--figures);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:8px}
+.s-head h2{font-family:var(--display);font-weight:500;font-size:clamp(1.8rem,3.8vw,2.7rem);letter-spacing:-.02em}
+.s-head h2 em{font-style:italic;color:var(--jade-deep)}
+.s-head p{color:var(--ink-2);max-width:62ch;margin-top:8px}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+.steps{display:flex;gap:8px;margin-bottom:26px;flex-wrap:wrap;animation:rise .6s .06s cubic-bezier(.2,.7,.2,1) both}
+.stab{display:flex;align-items:center;gap:9px;font-size:.86rem;font-weight:500;color:var(--ink-2);
+  background:var(--paper-raised);border:1px solid var(--rule-soft);border-radius:99px;padding:9px 16px 9px 11px;transition:.2s;cursor:pointer}
+.stab:hover{border-color:var(--rule-firm)}
+.stab.on{background:var(--ink);border-color:var(--ink);color:var(--paper-high)}
+.stab.locked{opacity:.45;cursor:not-allowed}
+.stab .n{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-family:var(--figures);font-size:.7rem;background:var(--paper-sunken);color:var(--ink-2)}
+.stab.on .n{background:var(--jade);color:#fff}
+.stab.done .n{background:var(--jade-wash);color:var(--jade-deep)}
+
+.panel{display:none;animation:rise .5s cubic-bezier(.2,.7,.2,1) both}
+.panel.on{display:block}
+
+.page{background:var(--paper-raised);border:1px solid var(--rule-soft);border-radius:20px;box-shadow:var(--shadow-2);
+  padding:32px 38px;max-width:760px;margin:0 auto;position:relative}
+.page::before{content:'';position:absolute;left:30px;top:18px;bottom:18px;width:1px;background:rgba(184,67,47,.22);pointer-events:none}
+.page .ph{text-align:center;border-bottom:1px solid var(--rule);padding-bottom:16px;margin-bottom:8px}
+.page .ph .co{font-family:var(--display);font-weight:600;font-size:1.25rem}
+.page .ph .ti{font-family:var(--display);font-style:italic;font-size:1rem;color:var(--jade-deep)}
+.page .ph .dt{font-family:var(--figures);font-size:.7rem;letter-spacing:.06em;color:var(--ink-3);margin-top:3px}
+
+.tbhead,.tbrow{display:grid;grid-template-columns:42px minmax(0,1fr) 130px 130px;gap:10px;align-items:center}
+.tbhead{font-family:var(--figures);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);padding:12px 2px 8px;border-bottom:1px solid var(--rule)}
+.tbhead .r{text-align:right}
+.tbrow{padding:7px 2px;border-bottom:1px solid var(--rule-soft);font-size:.9rem}
+.tbrow .no{font-family:var(--figures);font-size:.66rem;color:var(--ink-4)}
+.tbrow .amt{font-family:var(--figures);text-align:right;font-variant-numeric:tabular-nums}
+.tbrow .amt.z{color:var(--ink-4)}
+.tbrow.adj{background:var(--jade-wash);border-radius:6px}
+.tbtot{display:grid;grid-template-columns:42px minmax(0,1fr) 130px 130px;gap:10px;align-items:center;
+  margin-top:8px;padding:12px 2px;border-top:1px solid var(--ink);border-bottom:3px double var(--ink)}
+.tbtot .lbl{grid-column:1/3;font-family:var(--figures);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
+.tbtot .amt{font-family:var(--figures);font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
+.tie{display:flex;align-items:center;justify-content:center;gap:9px;margin-top:16px;font-family:var(--figures);font-size:.76rem}
+.tie .dot{width:8px;height:8px;border-radius:50%}
+.tie.ok{color:var(--jade-deep)}.tie.ok .dot{background:var(--jade)}
+.tie.no{color:var(--redink)}.tie.no .dot{background:var(--redink)}
+
+.adj-intro{max-width:760px;margin:0 auto 18px;font-family:var(--display);font-style:italic;font-size:1rem;color:var(--ink-2);text-align:center;line-height:1.5}
+.adj-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:760px;margin:0 auto}
+@media (max-width:680px){.adj-grid{grid-template-columns:1fr}}
+.clue-card{background:var(--paper-raised);border:1px solid var(--rule-soft);border-radius:16px;box-shadow:var(--shadow-1);padding:20px 22px;transition:.3s}
+.clue-card.solved{border-color:rgba(46,124,106,.5);background:linear-gradient(170deg,var(--paper-raised),var(--jade-wash))}
+.clue-card .cc-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.clue-card .cc-h .tag{font-family:var(--figures);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--brass);border:1px solid var(--brass);border-radius:5px;padding:2px 7px}
+.clue-card.solved .cc-h .tag{color:var(--jade-deep);border-color:var(--jade)}
+.clue-card .cc-stamp{font-family:var(--figures);font-size:.6rem;letter-spacing:.1em;font-weight:600;color:var(--jade-deep);display:none}
+.clue-card.solved .cc-stamp{display:inline-block;transform:rotate(-4deg)}
+.clue-card .doc{font-family:var(--display);font-style:italic;font-size:.98rem;color:var(--ink);margin-bottom:6px;line-height:1.45}
+.clue-card .sub{font-size:.82rem;color:var(--ink-2);margin-bottom:14px}
+.adj-row{display:grid;grid-template-columns:minmax(0,1fr) 92px 92px;gap:8px;margin-bottom:8px}
+.adj-lbl{display:grid;grid-template-columns:minmax(0,1fr) 92px 92px;gap:8px;font-family:var(--figures);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:4px}
+.adj-lbl span:not(:first-child){text-align:right}
+.adj-row select,.adj-row input{background:var(--paper-sunken);border:1px solid transparent;border-radius:9px;padding:9px 10px;font-size:.82rem;width:100%;transition:.15s}
+.adj-row select:focus,.adj-row input:focus{outline:none;background:var(--paper-high);border-color:var(--jade);box-shadow:0 0 0 3px rgba(46,124,106,.14)}
+.adj-row input.amt{font-family:var(--figures);text-align:right}
+.cc-actions{display:flex;align-items:center;gap:12px;margin-top:12px}
+.cc-check{font-size:.84rem;font-weight:600;color:#fff;background:var(--jade);padding:9px 16px;border-radius:10px}
+.cc-check:hover{background:var(--jade-deep)}
+.cc-check:disabled{opacity:.4;cursor:not-allowed}
+.cc-hint{font-size:.78rem;color:var(--ink-3);font-style:italic;font-family:var(--display);cursor:pointer;border-bottom:1px dotted var(--ink-4)}
+.cc-hint:hover{color:var(--jade-deep)}
+.cc-msg{font-size:.76rem;margin-top:8px;min-height:1.1em;font-family:var(--figures);line-height:1.45}
+.cc-msg.err{color:var(--redink)}.cc-msg.ok{color:var(--jade-deep)}
+.adj-progress{max-width:760px;margin:18px auto 0;text-align:center;font-family:var(--figures);font-size:.74rem;color:var(--ink-3)}
+
+.stmt .grp{font-family:var(--figures);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--brass);padding:16px 2px 6px;border-bottom:1px solid var(--rule-soft)}
+.stmt .ln{display:grid;grid-template-columns:minmax(0,1fr) 140px;gap:10px;padding:7px 2px;font-size:.9rem;border-bottom:1px solid var(--rule-soft)}
+.stmt .ln .amt{font-family:var(--figures);text-align:right;font-variant-numeric:tabular-nums}
+.stmt .ln.adj-lit{background:var(--jade-wash);border-radius:6px}
+.stmt .ln.indent{padding-left:18px;color:var(--ink-2)}
+.stmt .sub{display:grid;grid-template-columns:minmax(0,1fr) 140px;gap:10px;padding:9px 2px;font-weight:600;font-size:.92rem;border-top:1px solid var(--ink);margin-top:2px}
+.stmt .sub .amt{font-family:var(--figures);text-align:right;font-variant-numeric:tabular-nums}
+.stmt .net{display:grid;grid-template-columns:minmax(0,1fr) 140px;gap:10px;padding:11px 2px;font-weight:600;font-size:1.05rem;border-top:1px solid var(--ink);border-bottom:3px double var(--ink);margin-top:6px}
+.stmt .net .amt{font-family:var(--figures);text-align:right;color:var(--jade-deep);font-variant-numeric:tabular-nums}
+.stmt .flow{font-family:var(--display);font-style:italic;font-size:.88rem;color:var(--ink-3);text-align:center;margin:18px 0 4px}
+.stmt .flow b{color:var(--jade-deep);font-weight:600}
+
+.foot{max-width:760px;margin:22px auto 0;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.foot .note{font-family:var(--display);font-style:italic;font-size:.92rem;color:var(--ink-2)}
+.btn{display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:.9rem;padding:13px 22px;border-radius:12px;transition:transform .15s,background .2s,opacity .2s}
+.btn:active{transform:scale(.97)}
+.btn-ink{background:var(--ink);color:var(--paper-high)}
+.btn-ink:hover{filter:brightness(1.12)}
+.btn-ink:disabled{opacity:.4;cursor:not-allowed}
+.btn-ink svg{transition:transform .25s}.btn-ink:hover:not(:disabled) svg{transform:translateX(3px)}
+
+.sage-strip{max-width:760px;margin:24px auto 0;display:flex;gap:13px;align-items:flex-start;
+  background:var(--paper-high);border:1px solid var(--rule);border-radius:14px;padding:16px 18px}
+.sage-dot{width:26px;height:26px;border-radius:50%;flex:none;background:radial-gradient(circle at 32% 30%,#4DA08C,var(--jade-deep));box-shadow:inset 0 0 0 1px rgba(255,255,255,.25)}
+.sage-strip p{font-family:var(--display);font-style:italic;font-size:.95rem;color:var(--ink-2)}
+
+@media (max-width:640px){
+  .sheet{padding:28px 16px 60px}.page{padding:22px 18px}
+  .tbhead,.tbrow,.tbtot{grid-template-columns:34px minmax(0,1fr) 88px 88px;gap:6px;font-size:.82rem}
+  .stmt .ln,.stmt .sub,.stmt .net{grid-template-columns:minmax(0,1fr) 96px}
+  .foot{flex-direction:column;align-items:stretch}
+}
+
+/* ════════ CHIC LAYER ════════ */
+/* a slow living gradient breathing under the paper */
+body{position:relative}
+body::before{content:'';position:fixed;inset:-20% -20% auto -20%;height:62%;z-index:-1;pointer-events:none;
+  background:radial-gradient(60% 80% at 22% 0%, rgba(46,124,106,.10), transparent 60%),
+             radial-gradient(50% 70% at 82% 8%, rgba(160,120,43,.09), transparent 60%);
+  filter:blur(14px);animation:auraDrift 22s ease-in-out infinite alternate}
+[data-theme="dark"] body::before{background:radial-gradient(60% 80% at 22% 0%, rgba(77,160,140,.12), transparent 60%),radial-gradient(50% 70% at 82% 8%, rgba(196,154,74,.10), transparent 60%)}
+@keyframes auraDrift{0%{transform:translate3d(-2%,0,0) scale(1)}100%{transform:translate3d(3%,2%,0) scale(1.08)}}
+
+/* cursor-following spotlight, faint and classy */
+#chicGlow{position:fixed;width:520px;height:520px;border-radius:50%;left:0;top:0;z-index:0;pointer-events:none;
+  transform:translate(-50%,-50%);opacity:0;transition:opacity .6s ease;
+  background:radial-gradient(closest-side, rgba(46,124,106,.07), transparent 70%);mix-blend-mode:multiply}
+[data-theme="dark"] #chicGlow{background:radial-gradient(closest-side, rgba(127,196,177,.10), transparent 70%);mix-blend-mode:screen}
+
+/* entrance: rise + unblur, staggered by .chic-seq parent */
+.chic-in{opacity:0;transform:translateY(22px);filter:blur(6px)}
+.chic-in.lit{opacity:1;transform:none;filter:none;transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1),filter .8s ease}
+
+/* sheen sweep across cards on reveal + on hover */
+.chic-sheen{position:relative;overflow:hidden}
+.chic-sheen::after{content:'';position:absolute;top:-60%;left:-80%;width:55%;height:220%;pointer-events:none;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);transform:rotate(8deg) translateX(-30%);opacity:0}
+[data-theme="dark"] .chic-sheen::after{background:linear-gradient(100deg,transparent,rgba(255,255,255,.10),transparent)}
+.chic-sheen.lit::after{animation:sheen 1.5s cubic-bezier(.2,.7,.2,1) .25s}
+.chic-sheen:hover::after{animation:sheen 1s cubic-bezier(.2,.7,.2,1)}
+@keyframes sheen{0%{opacity:0;left:-80%}25%{opacity:1}100%{opacity:0;left:160%}}
+
+/* heading word reveal */
+.chic-word{display:inline-block;opacity:0;transform:translateY(.5em) rotate(2deg);
+  animation:wordUp .7s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes wordUp{to{opacity:1;transform:none}}
+
+/* magnetic / lift on interactive cards */
+.chic-mag{transition:transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s ease}
+
+/* link underline draw */
+a.chic-u{position:relative}
+a.chic-u::after{content:'';position:absolute;left:0;right:100%;bottom:-2px;height:1.5px;background:currentColor;
+  transition:right .3s cubic-bezier(.2,.7,.2,1);opacity:.6}
+a.chic-u:hover::after{right:0}
+
+/* nib logo: an ink drop that wells and falls, forever */
+.wordmark .nib,.spine .nib{overflow:visible}
+
+/* the closing double-rule animates its draw */
+.closing-rule div,.rule-div,.shelf-base{position:relative;overflow:hidden}
+
+/* buttons get a soft pulse-ready glow */
+.btn-jade,.btn-ink,.btn-post,.cc-check{position:relative;overflow:hidden}
+.btn-jade::after,.btn-ink::after,.cc-check::after{content:'';position:absolute;inset:0;border-radius:inherit;
+  background:radial-gradient(circle at var(--rx,50%) var(--ry,50%), rgba(255,255,255,.35), transparent 45%);opacity:0;transition:opacity .4s}
+.btn-jade:hover::after,.btn-ink:hover::after,.cc-check:hover::after{opacity:1}
+
+
+.tbrow.flagable{cursor:pointer}
+.tbrow.flagable:hover{background:var(--brass-wash);border-radius:6px}
+.tbrow.flagged-wrong{background:var(--redink-wash);border-radius:6px}
+.tbrow.flagged-ok{background:var(--jade-wash);border-radius:6px}
+.tb-task{max-width:760px;margin:0 auto 16px;background:var(--paper-high);border:1px solid var(--rule);border-left:3px solid var(--brass);border-radius:0 12px 12px 0;padding:14px 18px;display:flex;align-items:flex-start;gap:12px}
+.tb-task .ic{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--brass-wash);color:var(--brass)}
+.tb-task .tt{font-family:var(--display);font-style:italic;font-size:.98rem;color:var(--ink)}
+.tb-task .tt b{font-weight:600}
+.tb-task.solved{border-left-color:var(--jade)}
+.tb-task.solved .ic{background:var(--jade-wash);color:var(--jade-deep)}
+.tb-msg{font-family:var(--figures);font-size:.74rem;margin-top:6px;min-height:1em}
+.tb-msg.err{color:var(--redink)}.tb-msg.ok{color:var(--jade-deep)}
+.fixbar{max-width:760px;margin:14px auto 0;background:var(--paper-raised);border:1px solid var(--rule-soft);border-radius:14px;padding:16px 20px;display:none}
+.fixbar.on{display:block;animation:rise .4s cubic-bezier(.2,.7,.2,1) both}
+.fixbar h4{font-family:var(--display);font-weight:600;font-size:1rem;margin-bottom:4px}
+.fixbar .sub{font-size:.82rem;color:var(--ink-2);margin-bottom:12px}
+.fixrow{display:grid;grid-template-columns:minmax(0,1fr) 96px 96px;gap:8px;margin-bottom:8px}
+.fixrow select,.fixrow input{background:var(--paper-sunken);border:1px solid transparent;border-radius:9px;padding:9px 10px;font-size:.82rem;width:100%}
+.fixrow select:focus,.fixrow input:focus{outline:none;background:var(--paper-high);border-color:var(--jade);box-shadow:0 0 0 3px rgba(46,124,106,.14)}
+.fixrow input.amt{font-family:var(--figures);text-align:right}
+.fixrow input[disabled]{opacity:.45}
+.close-intro{max-width:760px;margin:0 auto 18px;font-family:var(--display);font-style:italic;font-size:1rem;color:var(--ink-2);text-align:center;line-height:1.5}
+.close-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:760px;margin:0 auto}
+.tally{max-width:760px;margin:18px auto 0;background:var(--paper-high);border:1px solid var(--rule);border-radius:14px;padding:16px 20px}
+.tally .row{display:flex;justify-content:space-between;font-size:.86rem;padding:5px 0;border-bottom:1px solid var(--rule-soft)}
+.tally .row b{font-family:var(--figures);font-variant-numeric:tabular-nums}
+.tally .cap-final{display:flex;justify-content:space-between;font-weight:600;padding:9px 0;border-top:1px solid var(--ink);border-bottom:3px double var(--ink);margin-top:4px}
+.tally .cap-final b{font-family:var(--figures);color:var(--jade-deep)}
+.closed-stamp{display:none;margin:22px auto 0;width:max-content;font-family:var(--figures);font-size:1rem;letter-spacing:.2em;font-weight:600;color:var(--jade-deep);border:3px solid var(--jade);border-radius:10px;padding:10px 26px;transform:rotate(-5deg)}
+.closed-stamp.on{display:block;animation:bigthump .5s cubic-bezier(.2,.9,.3,1.25) both}
+@keyframes bigthump{from{opacity:0;transform:rotate(-12deg) scale(2)}to{opacity:1;transform:rotate(-5deg) scale(1)}}
+@media (max-width:680px){.close-grid{grid-template-columns:1fr}}
+
+@media (prefers-reduced-motion:reduce){
+  body::before,#chicGlow{animation:none!important;display:none}
+  .chic-in{opacity:1!important;transform:none!important;filter:none!important}
+  .chic-word{opacity:1!important;transform:none!important;animation:none!important}
+  .chic-sheen::after{display:none}
+}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="spine">
+  <a class="back" href="workspace.html">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M19 12H5m6 6-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    The journal
+  </a>
+  <h1>Driftwood Coffee Co. · period end</h1>
+  <div class="right">
+    <a class="back" href="library.html" title="Account reference">Library</a>
+    <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle dark mode" title="Lamplight">
+      <svg class="moon" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+      <svg class="sun" width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2m0 16v2M4 12H2m20 0h-2m-2.9-7.1-1.4 1.4M6.3 17.7l-1.4 1.4m0-14.2 1.4 1.4m11.4 11.4 1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<main class="sheet">
+  <section class="s-head">
+    <p class="eyebrow">The accounting cycle · stages 3 to 6</p>
+    <h2>The entries are in. <em>Now make them speak.</em></h2>
+    <p>The journal balanced, but the books aren't done telling the truth. Some costs were used up this week without anyone writing a cheque — rent, supplies, wages owed. Find those three, adjust for them, and the statements rebuild themselves around your work.</p>
+  </section>
+
+  <div class="steps" role="tablist">
+    <button class="stab on" data-p="tb" role="tab"><span class="n">3</span>Trial balance</button>
+    <button class="stab" data-p="adj" role="tab"><span class="n">4</span>Adjustments</button>
+    <button class="stab locked" data-p="is" role="tab"><span class="n">5</span>Income statement</button>
+    <button class="stab locked" data-p="bs" role="tab"><span class="n">6</span>Balance sheet</button>
+    <button class="stab locked" data-p="close" role="tab"><span class="n">7</span>Close the books</button>
+  </div>
+
+  <section class="panel on" id="p-tb">
+    <div class="tb-task" id="tbTask">
+      <span class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+      <div>
+        <p class="tt"><b>Before you adjust, audit it.</b> One line below was posted to the wrong account during the week — the totals still tie, but the classification is off. Click the account you think is misplaced.</p>
+        <p class="tb-msg" id="tbMsg"></p>
+      </div>
+    </div>
+    <div class="page">
+      <div class="ph"><p class="co">Driftwood Coffee Co.</p><p class="ti" id="tbTitle">Unadjusted Trial Balance</p><p class="dt">As at June 11, 2026</p></div>
+      <div class="tbhead"><span></span><span>Account</span><span class="r">Debit</span><span class="r">Credit</span></div>
+      <div id="tbRows"></div>
+      <div class="tbtot"><span class="lbl" id="tbTotLbl">Totals</span><span class="amt" id="tbDr"></span><span class="amt" id="tbCr"></span></div>
+      <div class="tie ok" id="tbTie"><span class="dot"></span><span>In balance — debits equal credits</span></div>
+    </div>
+    <div class="fixbar" id="fixbar">
+      <h4>Good eye. Now correct it — in ink, on the record.</h4>
+      <p class="sub">The ₱1,800 sits in <b>Supplies</b>, but it was the espresso machine repair — that's a <b>Repairs Expense</b>, consumed the moment the technician left. Move it with a correcting entry.</p>
+      <div class="adj-lbl" style="display:grid;grid-template-columns:minmax(0,1fr) 96px 96px;gap:8px;font-family:var(--figures);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:4px"><span>Account</span><span>Debit</span><span>Credit</span></div>
+      <div class="fixrow">
+        <select id="fixDr"><option value="">— account —</option></select>
+        <input class="amt" id="fixDrAmt" inputmode="numeric" placeholder="amount">
+        <input class="amt" disabled placeholder="—">
+      </div>
+      <div class="fixrow">
+        <select id="fixCr"><option value="">— account —</option></select>
+        <input class="amt" disabled placeholder="—">
+        <input class="amt" id="fixCrAmt" inputmode="numeric" placeholder="amount">
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;margin-top:10px">
+        <button class="cc-check" id="fixPost">Post correction</button>
+        <span class="cc-hint" id="fixHint">Need a nudge?</span>
+      </div>
+      <p class="cc-msg" id="fixMsg"></p>
+    </div>
+    <div class="sage-strip">
+      <span class="sage-dot"></span>
+      <p>"It balances — but balanced isn't finished. Rent was prepaid, supplies got used, the baristas earned wages we haven't paid. Those costs belong to this period whether cash moved or not. That's what adjustments fix."</p>
+    </div>
+    <div class="foot">
+      <span class="note" id="tbFootNote">Audit the books first — catch and correct the misposting.</span>
+      <button class="btn btn-ink" id="tbNext" disabled onclick="go('adj')">Find the adjustments <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+  </section>
+
+  <section class="panel" id="p-adj">
+    <p class="adj-intro">Three things happened that no receipt announced. Read each note, choose the two accounts, enter the amount. Sage checks each one.</p>
+    <div class="adj-grid" id="adjGrid"></div>
+    <p class="adj-progress" id="adjProgress">0 of 3 adjustments posted</p>
+    <div class="foot">
+      <span class="note" id="adjNote">Post all three to unlock the statements.</span>
+      <button class="btn btn-ink" id="adjNext" disabled onclick="go('is')">Build the income statement <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+  </section>
+
+  <section class="panel" id="p-is">
+    <div class="page stmt">
+      <div class="ph"><p class="co">Driftwood Coffee Co.</p><p class="ti">Income Statement</p><p class="dt">For the period ended June 11, 2026</p></div>
+      <div class="grp">Revenue</div>
+      <div id="isRev"></div>
+      <div class="grp">Expenses</div>
+      <div id="isExp"></div>
+      <div class="sub"><span>Total expenses</span><span class="amt" id="isExpTot"></span></div>
+      <div class="net"><span>Net income</span><span class="amt" id="isNet"></span></div>
+      <p class="flow">This figure doesn't stay here. It flows into <b>Owner's Capital</b> on the balance sheet. →</p>
+    </div>
+    <div class="foot">
+      <span class="note">Revenue earned, less what it cost to earn it — adjustments included.</span>
+      <button class="btn btn-ink" onclick="go('bs')">Carry it to the balance sheet <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+  </section>
+
+  <section class="panel" id="p-bs">
+    <div class="page stmt">
+      <div class="ph"><p class="co">Driftwood Coffee Co.</p><p class="ti">Balance Sheet</p><p class="dt">As at June 11, 2026</p></div>
+      <div class="grp">Assets</div>
+      <div id="bsAsset"></div>
+      <div class="sub"><span>Total assets</span><span class="amt" id="bsAssetTot"></span></div>
+      <div class="grp">Liabilities</div>
+      <div id="bsLiab"></div>
+      <div class="sub"><span>Total liabilities</span><span class="amt" id="bsLiabTot"></span></div>
+      <div class="grp">Equity</div>
+      <div class="ln"><span>Owner's Capital, opening</span><span class="amt" id="bsCapOpen"></span></div>
+      <div class="ln indent"><span>+ Net income for the period</span><span class="amt" id="bsCapNI"></span></div>
+      <div class="sub"><span>Total equity</span><span class="amt" id="bsEqTot"></span></div>
+      <div class="net"><span>Liabilities + Equity</span><span class="amt" id="bsLE"></span></div>
+      <div class="tie ok" id="bsTie" style="margin-top:14px"><span class="dot"></span><span>Assets = Liabilities + Equity — the sheet balances</span></div>
+    </div>
+    <div class="sage-strip">
+      <span class="sage-dot"></span>
+      <p>"There it is — the accounting equation on its own two feet, adjustments and all. Close the period and Driftwood's first week is in the books."</p>
+    </div>
+    <div class="foot">
+      <span class="note">The equation holds. One step left — close the temporary accounts.</span>
+      <button class="btn btn-ink" onclick="go('close')">Close the books <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+  </section>
+  <section class="panel" id="p-close">
+    <p class="close-intro">Revenue and expense accounts are temporary — they tell this period's story, then reset to zero so next week starts clean. Close each into Owner's Capital.</p>
+    <div class="close-grid" id="closeGrid"></div>
+    <div class="tally" id="closeTally"></div>
+    <div class="closed-stamp" id="closedStamp">PERIOD CLOSED</div>
+    <div class="foot">
+      <span class="note" id="closeNote">Post both closing entries to seal the period.</span>
+      <button class="btn btn-ink" id="closeDone" disabled onclick="location.href='progress.html'">Shelve this period <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+  </section>
+</main>
+
+<script>
+function toggleTheme(){const r=document.documentElement;const d=r.dataset.theme==='dark';
+  if(d)delete r.dataset.theme;else r.dataset.theme='dark';try{localStorage.setItem('lgly-theme',d?'':'dark')}catch(e){}}
+
+const fmt=n=>n.toLocaleString('en-PH');
+const peso=n=>'₱'+fmt(n);
+const isDebitNormal=t=>t==='Asset'||t==='Expense';
+
+const LEDGER=[
+ {no:'101',name:'Cash',                    type:'Asset',    dr:95800, cr:0},
+ {no:'110',name:'Accounts Receivable',     type:'Asset',    dr:4000,  cr:0},
+ {no:'120',name:'Inventory — Coffee Beans',type:'Asset',    dr:20900, cr:0},
+ {no:'125',name:'Supplies',                type:'Asset',    dr:3600,  cr:0},
+ {no:'130',name:'Prepaid Rent',            type:'Asset',    dr:0,     cr:0},
+ {no:'150',name:'Equipment',               type:'Asset',    dr:85000, cr:0},
+ {no:'151',name:'Accumulated Depreciation',type:'ContraAsset',dr:0,   cr:0},
+ {no:'201',name:'Accounts Payable',        type:'Liability',dr:0,     cr:12500},
+ {no:'205',name:'Wages Payable',           type:'Liability',dr:0,     cr:0},
+ {no:'210',name:'Notes Payable',           type:'Liability',dr:0,     cr:50000},
+ {no:'220',name:'Unearned Revenue',        type:'Liability',dr:0,     cr:6000},
+ {no:'301',name:"Owner's Capital",         type:'Equity',   dr:0,     cr:121800},
+ {no:'401',name:'Sales Revenue',           type:'Revenue',  dr:0,     cr:41300},
+ {no:'501',name:'Cost of Goods Sold',      type:'Expense',  dr:12700, cr:0},
+ {no:'505',name:'Supplies Expense',        type:'Expense',  dr:0,     cr:0},
+ {no:'508',name:'Repairs Expense',         type:'Expense',  dr:0,     cr:0},
+ {no:'510',name:'Rent Expense',            type:'Expense',  dr:6000,  cr:0},
+ {no:'515',name:'Depreciation Expense',    type:'Expense',  dr:0,     cr:0},
+ {no:'520',name:'Wages Expense',           type:'Expense',  dr:3600,  cr:0},
+];
+const ALWAYS=['101','110','120','125','150','201','210','220','301','401','501','510','520'];
+
+const ADJ=[
+ {id:'a1', tag:'Note A', doc:'June rent of ₱6,000 was booked entirely as Rent Expense when paid — but ₱2,000 of it covers July, a month not yet used.',
+  sub:'Move the unused portion out of expense and into an asset.',
+  dr:'Prepaid Rent', cr:'Rent Expense', amt:2000,
+  hint:'Debit Prepaid Rent ₱2,000 (value not yet used is an asset). Credit Rent Expense ₱2,000 to remove July\u2019s share from this period.'},
+ {id:'a2', tag:'Note B', doc:'After your correction, Supplies carries ₱1,800. But a count of the store room shows only ₱1,100 still on the shelf.',
+  sub:'The difference was consumed running the café this week.',
+  dr:'Supplies Expense', cr:'Supplies', amt:700,
+  hint:'₱1,800 \u2212 ₱1,100 = ₱700 used up. Debit Supplies Expense ₱700, credit Supplies ₱700 to reduce the asset.'},
+ {id:'a3', tag:'Note C', doc:'The baristas worked the last two days of the period — ₱1,400 in wages — but won\u2019t be paid until next week\u2019s payroll.',
+  sub:'The cost belongs to this week even though the cash hasn\u2019t left.',
+  dr:'Wages Expense', cr:'Wages Payable', amt:1400,
+  hint:'Debit Wages Expense ₱1,400 (the work happened this period). Credit Wages Payable ₱1,400 (a liability — owed, not yet paid).'},
+];
+const ADJ_ACCTS=["Cash","Accounts Receivable","Inventory — Coffee Beans","Supplies","Prepaid Rent","Equipment","Accumulated Depreciation","Accounts Payable","Wages Payable","Notes Payable","Unearned Revenue","Sales Revenue","Cost of Goods Sold","Supplies Expense","Repairs Expense","Rent Expense","Depreciation Expense","Wages Expense"];
+const posted={};
+// ════ SPOT-THE-ERROR (the planted misposting) ════
+let corrected=false;
+const WRONG_ACCT='Supplies';   // the line posted to the wrong account
+const CORR={dr:'Repairs Expense', cr:'Supplies', amt:1800};
+
+function renderTBClickable(){
+  // make account rows clickable until caught
+  document.querySelectorAll('#tbRows .tbrow').forEach(r=>{
+    if(corrected){r.classList.remove('flagable');return;}
+    r.classList.add('flagable');
+    r.onclick=()=>{
+      const name=r.querySelector('a')?r.querySelector('a').textContent:r.children[1].textContent.trim();
+      const msg=document.getElementById('tbMsg');
+      if(name===WRONG_ACCT){
+        r.classList.add('flagged-ok');
+        document.getElementById('tbTask').classList.add('solved');
+        msg.className='tb-msg ok';msg.textContent='Caught it. ₱1,800 in Supplies was actually a machine repair. Correct it below.';
+        document.getElementById('fixbar').classList.add('on');
+        document.querySelectorAll('#tbRows .tbrow').forEach(x=>{x.classList.remove('flagable');x.onclick=null;});
+        document.getElementById('fixbar').scrollIntoView({behavior:'smooth',block:'center'});
+      } else {
+        r.classList.add('flagged-wrong');
+        msg.className='tb-msg err';msg.textContent=name+' looks fine. Re-read each account — which cost was filed as an asset?';
+        setTimeout(()=>r.classList.remove('flagged-wrong'),1200);
+      }
+    };
+  });
+}
+function setupFix(){
+  const opts=ADJ_ACCTS.map(a=>`<option>${a}</option>`).join('');
+  document.getElementById('fixDr').innerHTML='<option value="">— account —</option>'+opts;
+  document.getElementById('fixCr').innerHTML='<option value="">— account —</option>'+opts;
+  ['fixDrAmt','fixCrAmt'].forEach(id=>document.getElementById(id).addEventListener('input',e=>{
+    const n=parseFloat(e.target.value.replace(/[^0-9.]/g,''));e.target.value=isNaN(n)?'':n?fmt(n):'';
+  }));
+  document.getElementById('fixHint').onclick=()=>{
+    const m=document.getElementById('fixMsg');m.className='cc-msg';
+    m.textContent='Debit Repairs Expense ₱1,800 (the repair is a cost of this period). Credit Supplies ₱1,800 to pull it back out of the asset.';
+  };
+  document.getElementById('fixPost').onclick=()=>{
+    const drA=document.getElementById('fixDr').value, crA=document.getElementById('fixCr').value;
+    const drV=parseFloat((document.getElementById('fixDrAmt').value||'').replace(/[^0-9.]/g,''))||0;
+    const crV=parseFloat((document.getElementById('fixCrAmt').value||'').replace(/[^0-9.]/g,''))||0;
+    const m=document.getElementById('fixMsg');
+    if(!drA||!crA||!drV||!crV){m.className='cc-msg err';m.textContent='Fill both accounts and both amounts.';return;}
+    if(drV!==crV){m.className='cc-msg err';m.textContent='Debits must equal credits.';return;}
+    if(drA===CORR.dr&&crA===CORR.cr&&drV===CORR.amt){
+      corrected=true;
+      m.className='cc-msg ok';m.textContent='Correction posted. The books are clean — now adjust.';
+      document.getElementById('fixbar').querySelectorAll('select,input,button').forEach(el=>el.disabled=true);
+      document.getElementById('tbNext').disabled=false;
+      document.getElementById('tbFootNote').textContent='Books audited and corrected. Find what the cash never announced.';
+      renderTB();buildStatements();
+    } else if(drA===CORR.cr&&crA===CORR.dr){
+      m.className='cc-msg err';m.textContent='Right accounts, wrong sides — flip debit and credit.';
+    } else {
+      m.className='cc-msg err';m.textContent='Not quite. The repair becomes an expense; the asset shrinks.';
+    }
+  };
+}
+// fold the correction into the working ledger
+function applyCorrection(L){
+  if(!corrected)return;
+  const f=n=>L.find(a=>a.name===n);
+  applySide(f(CORR.dr),CORR.amt,true);applySide(f(CORR.cr),CORR.amt,false);
+}
+
+
+function applySide(acct, amt, debit){
+  const dn=isDebitNormal(acct.type)?true:false; // Asset/Expense debit-normal; ContraAsset/Liab/Equity/Rev credit-normal
+  if(debit===dn){ if(dn)acct.dr+=amt; else acct.cr+=amt; }
+  else { if(dn)acct.dr-=amt; else acct.cr-=amt; }
+}
+function workingLedger(){
+  const L=LEDGER.map(a=>({...a}));
+  applyCorrection(L);
+  const f=n=>L.find(a=>a.name===n);
+  ADJ.forEach(adj=>{ if(!posted[adj.id])return;
+    applySide(f(adj.dr), adj.amt, true);
+    applySide(f(adj.cr), adj.amt, false);
+  });
+  return L;
+}
+function touchedSet(){const s=new Set();if(corrected){s.add(CORR.dr);s.add(CORR.cr);}ADJ.forEach(a=>{if(posted[a.id]){s.add(a.dr);s.add(a.cr);}});return s;}
+
+function renderTB(){
+  const anyAdj=Object.keys(posted).length>0;
+  const L=workingLedger(), touched=touchedSet();
+  let TDR=0,TCR=0,html='';
+  L.forEach(a=>{
+    if(!(ALWAYS.includes(a.no)||touched.has(a.name)))return;
+    TDR+=a.dr;TCR+=a.cr;
+    html+=`<div class="tbrow${touched.has(a.name)?' adj':''}"><span class="no">${a.no}</span>
+      <span><a class="back" style="padding:0;color:inherit" href="library.html#${a.no}">${a.name}</a></span>
+      <span class="amt${a.dr?'':' z'}">${a.dr?fmt(a.dr):'—'}</span>
+      <span class="amt${a.cr?'':' z'}">${a.cr?fmt(a.cr):'—'}</span></div>`;
+  });
+  document.getElementById('tbRows').innerHTML=html;
+  document.getElementById('tbDr').textContent=fmt(TDR);
+  document.getElementById('tbCr').textContent=fmt(TCR);
+  document.getElementById('tbTitle').textContent=anyAdj?'Adjusted Trial Balance':'Unadjusted Trial Balance';
+  document.getElementById('tbTotLbl').textContent=anyAdj?'Adjusted totals':'Totals';
+  const t=document.getElementById('tbTie');
+  if(TDR===TCR){t.className='tie ok';t.querySelector('span:last-child').textContent=anyAdj?'Still in balance after adjustments':'In balance — debits equal credits';}
+  else{t.className='tie no';t.querySelector('span:last-child').textContent='Out of balance by ₱'+fmt(Math.abs(TDR-TCR));}
+}
+
+function renderAdjCards(){
+  const opts=ADJ_ACCTS.map(a=>`<option>${a}</option>`).join('');
+  document.getElementById('adjGrid').innerHTML=ADJ.map(a=>`
+    <div class="clue-card" id="card-${a.id}">
+      <div class="cc-h"><span class="tag">${a.tag}</span><span class="cc-stamp">✓ POSTED</span></div>
+      <p class="doc">${a.doc}</p>
+      <p class="sub">${a.sub}</p>
+      <div class="adj-lbl"><span>Account</span><span>Debit</span><span>Credit</span></div>
+      <div class="adj-row">
+        <select aria-label="Debit account" data-r="dr"><option value="">— account —</option>${opts}</select>
+        <input class="amt" inputmode="numeric" placeholder="amount" data-r="dramt" aria-label="Debit amount">
+        <input class="amt" disabled placeholder="—">
+      </div>
+      <div class="adj-row">
+        <select aria-label="Credit account" data-r="cr"><option value="">— account —</option>${opts}</select>
+        <input class="amt" disabled placeholder="—">
+        <input class="amt" inputmode="numeric" placeholder="amount" data-r="cramt" aria-label="Credit amount">
+      </div>
+      <div class="cc-actions">
+        <button class="cc-check" data-id="${a.id}">Post adjustment</button>
+        <span class="cc-hint" data-hint="${a.id}">Need a nudge?</span>
+      </div>
+      <p class="cc-msg" id="msg-${a.id}"></p>
+    </div>`).join('');
+
+  document.querySelectorAll('.cc-check').forEach(b=>b.addEventListener('click',()=>checkAdj(b.dataset.id)));
+  document.querySelectorAll('.cc-hint').forEach(h=>h.addEventListener('click',()=>{
+    const a=ADJ.find(x=>x.id===h.dataset.hint), m=document.getElementById('msg-'+a.id);
+    m.className='cc-msg';m.textContent=a.hint;
+  }));
+  document.querySelectorAll('.adj-row input.amt:not([disabled])').forEach(inp=>{
+    inp.addEventListener('input',()=>{const n=parseFloat(inp.value.replace(/[^0-9.]/g,''));inp.value=isNaN(n)?'':n?fmt(n):''});
+  });
+}
+function checkAdj(id){
+  if(posted[id])return;
+  const a=ADJ.find(x=>x.id===id), card=document.getElementById('card-'+id), msg=document.getElementById('msg-'+id);
+  const drA=card.querySelector('[data-r="dr"]').value, crA=card.querySelector('[data-r="cr"]').value;
+  const drV=parseFloat((card.querySelector('[data-r="dramt"]').value||'').replace(/[^0-9.]/g,''))||0;
+  const crV=parseFloat((card.querySelector('[data-r="cramt"]').value||'').replace(/[^0-9.]/g,''))||0;
+  if(!drA||!crA||!drV||!crV){msg.className='cc-msg err';msg.textContent='Fill both accounts and both amounts.';return;}
+  if(drV!==crV){msg.className='cc-msg err';msg.textContent='Debits must equal credits — they differ by ₱'+fmt(Math.abs(drV-crV))+'.';return;}
+  if(drA===a.dr && crA===a.cr && drV===a.amt){
+    posted[id]=true;
+    card.classList.add('solved');
+    card.querySelectorAll('select,input,button').forEach(el=>el.disabled=true);
+    msg.className='cc-msg ok';msg.textContent='Posted. The trial balance and statements just updated.';
+    afterPost();
+  } else if(drA===a.cr && crA===a.dr){
+    msg.className='cc-msg err';msg.textContent='Right accounts, wrong sides — debit and credit are flipped.';
+  } else if(drV!==a.amt){
+    msg.className='cc-msg err';msg.textContent='Accounts look right, but check the amount against the note.';
+  } else {
+    msg.className='cc-msg err';msg.textContent='Not quite. Re-read the note: which account grows, which shrinks?';
+  }
+}
+function afterPost(){
+  const n=Object.keys(posted).length;
+  document.getElementById('adjProgress').textContent=n+' of 3 adjustments posted';
+  renderTB(); renderTBClickable(); buildStatements();
+  if(n===3){
+    document.getElementById('adjNext').disabled=false;
+    document.getElementById('adjNote').textContent='All three posted. The statements are ready.';
+    document.querySelectorAll('.stab.locked').forEach(s=>s.classList.remove('locked'));
+    buildClose();
+  }
+}
+
+function buildStatements(){
+  const L=workingLedger(), touched=touchedSet();
+  const lit=n=>touched.has(n)?' adj-lit':'';
+  const rev=L.filter(a=>a.type==='Revenue'&&(a.dr||a.cr));
+  const exp=L.filter(a=>a.type==='Expense'&&(a.dr||a.cr));
+  const revTot=rev.reduce((s,a)=>s+a.cr,0), expTot=exp.reduce((s,a)=>s+a.dr,0), NI=revTot-expTot;
+  document.getElementById('isRev').innerHTML=rev.map(a=>`<div class="ln${lit(a.name)}"><span>${a.name}</span><span class="amt">${fmt(a.cr)}</span></div>`).join('')+`<div class="sub"><span>Total revenue</span><span class="amt">${fmt(revTot)}</span></div>`;
+  document.getElementById('isExp').innerHTML=exp.map(a=>`<div class="ln${lit(a.name)}"><span>${a.name}</span><span class="amt">${fmt(a.dr)}</span></div>`).join('');
+  document.getElementById('isExpTot').textContent=fmt(expTot);
+  document.getElementById('isNet').textContent=peso(NI);
+
+  const assets=L.filter(a=>(a.type==='Asset'||a.type==='ContraAsset')&&(a.dr||a.cr));
+  const liab=L.filter(a=>a.type==='Liability'&&(a.dr||a.cr));
+  let assetTot=0;
+  document.getElementById('bsAsset').innerHTML=assets.map(a=>{
+    const contra=a.type==='ContraAsset';
+    const val=contra?-a.cr:a.dr; assetTot+=val;
+    return `<div class="ln${lit(a.name)}"><span>${a.name}</span><span class="amt">${contra?'('+fmt(a.cr)+')':fmt(a.dr)}</span></div>`;
+  }).join('');
+  document.getElementById('bsAssetTot').textContent=fmt(assetTot);
+  const liabTot=liab.reduce((s,a)=>s+a.cr,0);
+  document.getElementById('bsLiab').innerHTML=liab.map(a=>`<div class="ln${lit(a.name)}"><span>${a.name}</span><span class="amt">${fmt(a.cr)}</span></div>`).join('');
+  document.getElementById('bsLiabTot').textContent=fmt(liabTot);
+  const capOpen=121800, eqTot=capOpen+NI;
+  document.getElementById('bsCapOpen').textContent=fmt(capOpen);
+  document.getElementById('bsCapNI').textContent=fmt(NI);
+  document.getElementById('bsEqTot').textContent=fmt(eqTot);
+  document.getElementById('bsLE').textContent=peso(liabTot+eqTot);
+  const t=document.getElementById('bsTie');
+  if(assetTot===liabTot+eqTot){t.className='tie ok';t.querySelector('span:last-child').textContent='Assets = Liabilities + Equity — the sheet balances';}
+  else{t.className='tie no';t.querySelector('span:last-child').textContent='Off by ₱'+fmt(Math.abs(assetTot-(liabTot+eqTot)));}
+}
+
+const ORDER=['tb','adj','is','bs','close'];
+// ════ CLOSING ENTRIES (stage 7) ════
+const closed={};
+function periodNumbers(){
+  const L=workingLedger();
+  const rev=L.filter(a=>a.type==='Revenue').reduce((s,a)=>s+a.cr,0);
+  const exp=L.filter(a=>a.type==='Expense').reduce((s,a)=>s+a.dr,0);
+  return {rev,exp,ni:rev-exp};
+}
+const CLOSE=[
+ {id:'c1',tag:'Close revenue',
+  doc:'Sales Revenue carries a credit balance for the period. Close it by debiting it to zero and moving the total into capital.',
+  dr:'Sales Revenue',cr:"Owner's Capital",get amt(){return periodNumbers().rev;},
+  hint:'Debit Sales Revenue for its full balance, credit Owner\u2019s Capital the same — revenue flows into equity.'},
+ {id:'c2',tag:'Close expenses',
+  doc:'Every expense account carries a debit balance. Close them as one: credit the total of all expenses, debit capital for the same amount.',
+  dr:"Owner's Capital",cr:'(all expense accounts)',get amt(){return periodNumbers().exp;},
+  hint:'Debit Owner\u2019s Capital for total expenses, credit the expense accounts — costs reduce equity.'},
+];
+const CLOSE_ACCTS=['Sales Revenue',"Owner's Capital",'(all expense accounts)','Cash','Inventory — Coffee Beans'];
+function buildClose(){
+  const opts=CLOSE_ACCTS.map(a=>`<option>${a}</option>`).join('');
+  document.getElementById('closeGrid').innerHTML=CLOSE.map(c=>`
+    <div class="clue-card" id="cl-${c.id}">
+      <div class="cc-h"><span class="tag">${c.tag}</span><span class="cc-stamp">✓ CLOSED</span></div>
+      <p class="doc">${c.doc}</p>
+      <div class="adj-lbl" style="display:grid;grid-template-columns:minmax(0,1fr) 92px 92px;gap:8px;font-family:var(--figures);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:4px"><span>Account</span><span>Debit</span><span>Credit</span></div>
+      <div class="adj-row">
+        <select data-r="dr"><option value="">— account —</option>${opts}</select>
+        <input class="amt" inputmode="numeric" placeholder="amount" data-r="dramt">
+        <input class="amt" disabled placeholder="—">
+      </div>
+      <div class="adj-row">
+        <select data-r="cr"><option value="">— account —</option>${opts}</select>
+        <input class="amt" disabled placeholder="—">
+        <input class="amt" inputmode="numeric" placeholder="amount" data-r="cramt">
+      </div>
+      <div class="cc-actions"><button class="cc-check" data-id="${c.id}">Post closing entry</button><span class="cc-hint" data-h="${c.id}">Need a nudge?</span></div>
+      <p class="cc-msg" id="clmsg-${c.id}"></p>
+    </div>`).join('');
+  renderTally();
+  document.querySelectorAll('#closeGrid .cc-check').forEach(b=>b.addEventListener('click',()=>checkClose(b.dataset.id)));
+  document.querySelectorAll('#closeGrid .cc-hint').forEach(h=>h.addEventListener('click',()=>{
+    const c=CLOSE.find(x=>x.id===h.dataset.h),m=document.getElementById('clmsg-'+c.id);m.className='cc-msg';m.textContent=c.hint;
+  }));
+  document.querySelectorAll('#closeGrid input.amt:not([disabled])').forEach(inp=>inp.addEventListener('input',()=>{
+    const n=parseFloat(inp.value.replace(/[^0-9.]/g,''));inp.value=isNaN(n)?'':n?fmt(n):'';
+  }));
+}
+function renderTally(){
+  const p=periodNumbers();
+  const capAfterRev=121800+(closed.c1?p.rev:0);
+  const capFinal=121800+(closed.c1?p.rev:0)-(closed.c2?p.exp:0);
+  document.getElementById('closeTally').innerHTML=`
+    <div class="row"><span>Owner's Capital, opening</span><b>${fmt(121800)}</b></div>
+    <div class="row"><span>+ Revenue closed in</span><b>${closed.c1?fmt(p.rev):'—'}</b></div>
+    <div class="row"><span>− Expenses closed out</span><b>${closed.c2?fmt(p.exp):'—'}</b></div>
+    <div class="cap-final"><span>Owner's Capital, ending</span><b>${peso(capFinal)}</b></div>`;
+}
+function checkClose(id){
+  if(closed[id])return;
+  const c=CLOSE.find(x=>x.id===id),card=document.getElementById('cl-'+id),m=document.getElementById('clmsg-'+id);
+  const drA=card.querySelector('[data-r="dr"]').value,crA=card.querySelector('[data-r="cr"]').value;
+  const drV=parseFloat((card.querySelector('[data-r="dramt"]').value||'').replace(/[^0-9.]/g,''))||0;
+  const crV=parseFloat((card.querySelector('[data-r="cramt"]').value||'').replace(/[^0-9.]/g,''))||0;
+  if(!drA||!crA||!drV||!crV){m.className='cc-msg err';m.textContent='Fill both accounts and both amounts.';return;}
+  if(drV!==crV){m.className='cc-msg err';m.textContent='Debits must equal credits.';return;}
+  if(drA===c.dr&&crA===c.cr&&drV===c.amt){
+    closed[id]=true;card.classList.add('solved');
+    card.querySelectorAll('select,input,button').forEach(el=>el.disabled=true);
+    m.className='cc-msg ok';m.textContent='Closed. The temporary accounts reset toward zero.';
+    renderTally();
+    if(closed.c1&&closed.c2){
+      document.getElementById('closedStamp').classList.add('on');
+      document.getElementById('closeDone').disabled=false;
+      document.getElementById('closeNote').textContent='Books closed. Driftwood\u2019s first week is sealed.';
+    }
+  } else if(drV!==c.amt){
+    m.className='cc-msg err';m.textContent='Accounts right, amount off — close the full balance of that account.';
+  } else {
+    m.className='cc-msg err';m.textContent='Check direction: revenue closes by a debit, expenses close by a credit.';
+  }
+}
+
+function go(p){
+  const tab=document.querySelector('.stab[data-p="'+p+'"]');
+  if(tab&&tab.classList.contains('locked'))return;
+  document.querySelectorAll('.panel').forEach(el=>el.classList.toggle('on',el.id==='p-'+p));
+  document.querySelectorAll('#p-'+p+' .chic-in').forEach(el=>el.classList.add('lit'));
+  document.querySelectorAll('.stab').forEach(t=>{
+    const tp=t.dataset.p;
+    t.classList.toggle('on',tp===p);
+    if(!t.classList.contains('locked')) t.classList.toggle('done',ORDER.indexOf(tp)<ORDER.indexOf(p));
+  });
+  scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.stab').forEach(t=>t.addEventListener('click',()=>go(t.dataset.p)));
+
+renderTB(); renderTBClickable(); setupFix(); renderAdjCards(); buildStatements(); buildClose();
+</script>
+<script>
+/* ════════ CHIC LAYER ════════ */
+(function(){
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce)return;
+
+  // cursor spotlight
+  var glow=document.createElement('div');glow.id='chicGlow';document.body.appendChild(glow);
+  var gx=innerWidth/2,gy=innerHeight/2,tx=gx,ty=gy;
+  addEventListener('pointermove',function(e){tx=e.clientX;ty=e.clientY;glow.style.opacity=1;},{passive:true});
+  (function loop(){gx+=(tx-gx)*.12;gy+=(ty-gy)*.12;glow.style.left=gx+'px';glow.style.top=gy+'px';requestAnimationFrame(loop);})();
+
+  // heading word-reveal: split the biggest heading on the page
+  var h=document.querySelector('h1, .s-head h2, .greeting h1, .lib-head h1, .fol-head h1, .rev-head h2, .hero h1');
+  if(h && !h.dataset.chicSplit){
+    h.dataset.chicSplit='1';
+    var walk=function(node){
+      [].slice.call(node.childNodes).forEach(function(n){
+        if(n.nodeType===3){ // text
+          var frag=document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach(function(w){
+            if(/^\s+$/.test(w)||w===''){frag.appendChild(document.createTextNode(w));return;}
+            var s=document.createElement('span');s.className='chic-word';s.textContent=w;frag.appendChild(s);
+          });
+          n.replaceWith(frag);
+        } else if(n.nodeType===1 && !/SVG/i.test(n.nodeName)){ walk(n); }
+      });
+    };
+    walk(h);
+    [].slice.call(h.querySelectorAll('.chic-word')).forEach(function(s,i){s.style.animationDelay=(i*55+80)+'ms';});
+  }
+
+  // entrance choreography: tag cards/sections, reveal on scroll
+  var sel='.card, .panel.on .page, .story-card, .receipt, .clue, .tacct, .sage, .acct-card, .stab, .proof, .cycle-strip, .final, .clue-card, .sage-strip, .posted, .entry-card, .deckcard, .streakcard, .dialcard, .sagecard, .casefile, .bs, .mid > *, .shelfcard, .notescard, .primer, .controls';
+  var nodes=[].slice.call(document.querySelectorAll(sel)).filter(function(n){return !n.closest('#chicGlow')});
+  // de-dupe nested
+  nodes=nodes.filter(function(n){return !nodes.some(function(m){return m!==n && m.contains(n)});});
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(en){
+      if(en.isIntersecting){
+        var el=en.target, idx=+el.dataset.chicI||0;
+        setTimeout(function(){el.classList.add('lit');},Math.min(idx*70,420));
+        io.unobserve(el);
+      }
+    });
+  },{threshold:.08,rootMargin:'0px 0px -6% 0px'});
+  nodes.forEach(function(n,i){n.classList.add('chic-in');if(n.matches('.card,.page,.clue-card,.story-card,.receipt,.tacct,.proof,.posted,.entry-card,.bs,.shelfcard,.notescard,.primer'))n.classList.add('chic-sheen');n.dataset.chicI=i%6;io.observe(n);});
+  // anything already in view at load: reveal immediately so nothing sits hidden behind the fold
+  requestAnimationFrame(function(){
+    nodes.forEach(function(n){var r=n.getBoundingClientRect();if(r.top<innerHeight*0.96){n.classList.add('lit');io.unobserve(n);}});
+  });
+
+
+  // magnetic buttons + ripple origin
+  [].slice.call(document.querySelectorAll('.btn-jade,.btn-ink,.btn-post,.cc-check,.btn')).forEach(function(b){
+    b.classList.add('chic-mag');
+    b.addEventListener('pointermove',function(e){
+      var r=b.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;
+      b.style.setProperty('--rx',(x/r.width*100)+'%');b.style.setProperty('--ry',(y/r.height*100)+'%');
+      b.style.transform='translate('+((x/r.width-.5)*5).toFixed(1)+'px,'+((y/r.height-.5)*5).toFixed(1)+'px)';
+    });
+    b.addEventListener('pointerleave',function(){b.style.transform='';});
+  });
+
+  // links get the underline-draw
+  [].slice.call(document.querySelectorAll('.spine nav a, .sage-link, .alink, .acctlink, .back')).forEach(function(a){a.classList.add('chic-u');});
+})();
+</script>
+</body>
+</html>

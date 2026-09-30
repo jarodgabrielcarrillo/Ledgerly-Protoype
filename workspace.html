@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ledgerly — Driftwood Coffee Co. · Day 3</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2C8 7 5 10 5 14a7 7 0 0 0 14 0c0-4-3-7-7-12Z' fill='%2321303F'/%3E%3Ccircle cx='12' cy='14' r='1.8' fill='%232E7C6A'/%3E%3C/svg%3E">
+<script>try{if(localStorage.getItem('lgly-theme')==='dark')document.documentElement.dataset.theme='dark'}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Schibsted+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F6F1E4; --paper-raised:#FCFAF2; --paper-high:#FFFEF9; --paper-sunken:#EFE8D6;
+  --rule:#E2D8BF; --rule-soft:#EAE2CD; --rule-firm:#CDBF9E;
+  --ink:#21303F; --ink-2:#4C5B6D; --ink-3:#6F7C8B; --ink-4:#B3BBC6;
+  --jade:#2E7C6A; --jade-deep:#235F52; --jade-wash:#E3EEE6;
+  --redink:#B8432F; --redink-wash:#F6E5E0;
+  --brass:#A0782B; --brass-wash:#F2E8CE;
+  --display:'Fraunces',Georgia,serif;
+  --body:'Schibsted Grotesk',-apple-system,sans-serif;
+  --figures:'Spline Sans Mono','SF Mono',monospace;
+  --shadow-1:0 1px 2px rgba(63,48,18,.05),0 2px 8px rgba(63,48,18,.05);
+  --shadow-2:0 2px 4px rgba(63,48,18,.06),0 10px 28px rgba(63,48,18,.09);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.5;min-height:100vh;
+  background-image:radial-gradient(ellipse 70% 40% at 50% -5%, rgba(255,254,247,.9), transparent);
+}
+::selection{background:var(--jade-wash);color:var(--jade-deep)}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+a{color:inherit;text-decoration:none}
+input{font-family:inherit;color:inherit}
+
+/* ───────── spine ───────── */
+.spine{
+  max-width:1320px;margin:0 auto;padding:18px 28px;
+  display:flex;align-items:center;gap:20px;
+  border-bottom:1px solid var(--rule-soft);
+}
+.back{display:flex;align-items:center;gap:8px;font-size:.84rem;font-weight:500;color:var(--ink-3);
+  padding:7px 12px;border-radius:99px;transition:.18s}
+.back:hover{background:var(--paper-sunken);color:var(--ink)}
+.scenario-id{display:flex;align-items:baseline;gap:14px}
+.scenario-id h1{font-family:var(--display);font-weight:600;font-size:1.15rem;letter-spacing:-.01em}
+.day-ribbon{display:flex;gap:4px;align-self:center}
+.stitch{width:14px;height:4px;border-radius:3px;background:var(--rule)}
+.stitch.done{background:var(--jade)}
+.spine .right{margin-left:auto;display:flex;align-items:center;gap:12px}
+.tb-chip{display:flex;align-items:center;gap:7px;font-family:var(--figures);font-size:.74rem;font-weight:500;
+  color:var(--jade-deep);background:var(--jade-wash);border:1px solid rgba(46,124,106,.25);
+  padding:6px 12px;border-radius:99px}
+.tb-chip .pulse{width:7px;height:7px;border-radius:50%;background:var(--jade)}
+
+/* ───────── desk grid ───────── */
+.desk{
+  max-width:1320px;margin:0 auto;padding:26px 28px 60px;
+  display:grid;grid-template-columns:300px minmax(0,1fr) 296px;gap:24px;align-items:start;
+}
+@media (max-width:1120px){.desk{grid-template-columns:280px minmax(0,1fr)}.rail{grid-column:1/-1;flex-direction:row;flex-wrap:wrap;position:static}.rail>*{flex:1;min-width:260px}}
+@media (max-width:780px){.desk{grid-template-columns:1fr}.story{position:static}}
+
+.panel-label{font-family:var(--figures);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:12px}
+
+/* ───────── story column ───────── */
+.story{position:sticky;top:22px;animation:rise .5s cubic-bezier(.2,.7,.2,1) both}
+.story-card{background:var(--paper-raised);border:1px solid var(--rule-soft);border-radius:18px;box-shadow:var(--shadow-1);padding:24px;margin-bottom:18px}
+.story-card .when{font-family:var(--figures);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--brass);margin-bottom:10px}
+.story-card p{font-family:var(--display);font-size:1.02rem;line-height:1.6;color:var(--ink-2)}
+.story-card p strong{color:var(--ink);font-weight:600}
+
+/* the receipt — torn paper source document */
+.receipt{
+  background:var(--paper-high);border:1px solid var(--rule);border-top:none;
+  border-radius:0 0 12px 12px;padding:20px 22px 22px;position:relative;
+  box-shadow:var(--shadow-1);transform:rotate(-.6deg);
+  font-family:var(--figures);
+}
+.receipt::before{ /* torn top edge */
+  content:'';position:absolute;top:-9px;left:-1px;right:-1px;height:10px;
+  background:var(--paper-high);
+  clip-path:polygon(0 100%,3% 18%,7% 88%,12% 30%,17% 92%,22% 18%,27% 80%,33% 26%,38% 95%,44% 32%,50% 85%,56% 20%,62% 90%,68% 30%,74% 82%,80% 18%,86% 90%,92% 28%,97% 84%,100% 100%);
+  border-left:1px solid var(--rule);border-right:1px solid var(--rule);
+}
+.receipt .rhead{display:flex;justify-content:space-between;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);
+  border-bottom:1px dashed var(--rule-firm);padding-bottom:10px;margin-bottom:12px}
+.receipt .rline{display:flex;justify-content:space-between;font-size:.8rem;padding:4px 0}
+.receipt .rline .l{color:var(--ink-2)}
+.receipt .rline .v{font-weight:600}
+.receipt .rtotal{display:flex;justify-content:space-between;font-size:.92rem;font-weight:600;
+  border-top:1px solid var(--ink);border-bottom:3px double var(--ink);padding:8px 0;margin-top:10px}
+.receipt .rterms{font-size:.68rem;color:var(--redink);margin-top:12px;text-align:center;letter-spacing:.06em}
+.txn-count{font-family:var(--figures);font-size:.72rem;color:var(--ink-3);text-align:center;margin-top:16px}
+
+/* ───────── journal column ───────── */
+.journal{animation:rise .5s .08s cubic-bezier(.2,.7,.2,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.entry-card{
+  background:var(--paper-raised);border:1px solid var(--rule-soft);border-radius:20px;
+  box-shadow:var(--shadow-2);padding:30px 32px 26px;margin-bottom:22px;
+  transition:box-shadow .4s ease, border-color .4s ease;
+}
+.entry-card.balanced{border-color:rgba(46,124,106,.45);box-shadow:0 2px 4px rgba(63,48,18,.06),0 10px 28px rgba(46,124,106,.16)}
+.entry-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:22px}
+.entry-head h2{font-family:var(--display);font-weight:600;font-size:1.45rem;letter-spacing:-.01em}
+.entry-head .date{font-family:var(--figures);font-size:.78rem;color:var(--ink-3)}
+
+.jhead,.jrow{display:grid;grid-template-columns:minmax(0,1fr) 128px 128px 30px;gap:12px;align-items:center}
+.jhead{font-family:var(--figures);font-size:.66rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);
+  padding:0 2px 9px;border-bottom:1px solid var(--rule)}
+.jhead .num{text-align:right}
+.jrow{padding:9px 2px;border-bottom:1px solid var(--rule-soft)}
+.jrow input{
+  background:var(--paper-sunken);border:1px solid transparent;border-radius:9px;
+  padding:10px 12px;font-size:.9rem;width:100%;transition:border-color .15s, background .15s, box-shadow .15s;
+}
+.jrow input:hover{border-color:var(--rule-firm)}
+.jrow input:focus{outline:none;background:var(--paper-high);border-color:var(--jade);box-shadow:0 0 0 3px rgba(46,124,106,.14)}
+.jrow input.amt{font-family:var(--figures);text-align:right;font-size:.88rem}
+.jrow input::placeholder{color:var(--ink-4)}
+.jrow.credit-row .acct{padding-left:34px} /* the classic credit indent */
+.jrow .del{color:var(--ink-4);border-radius:8px;width:28px;height:28px;display:grid;place-items:center;transition:.15s}
+.jrow .del:hover{color:var(--redink);background:var(--redink-wash)}
+.addline{margin:12px 2px 4px;font-size:.82rem;font-weight:600;color:var(--ink-3);display:inline-flex;align-items:center;gap:7px;
+  padding:8px 12px;border-radius:9px;transition:.15s}
+.addline:hover{color:var(--jade-deep);background:var(--jade-wash)}
+
+/* totals row — trial-balance ruling */
+.jtotals{display:grid;grid-template-columns:minmax(0,1fr) 128px 128px 30px;gap:12px;align-items:center;
+  margin-top:10px;padding:12px 2px 10px;border-top:1px solid var(--ink);border-bottom:3px double var(--ink)}
+.jtotals .lbl{font-family:var(--figures);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+.jtotals .sum{font-family:var(--figures);font-weight:600;font-size:.95rem;text-align:right;padding-right:12px;font-variant-numeric:tabular-nums;transition:color .3s}
+.jtotals .sum.even{color:var(--jade-deep)}
+
+/* ───────── the balance beam ───────── */
+.beam-zone{display:flex;align-items:center;gap:24px;margin-top:22px}
+.beam-stage{flex:1;display:flex;justify-content:center}
+.beam{width:240px;height:96px;position:relative}
+.beam .bar{
+  position:absolute;left:10px;right:10px;top:24px;height:4px;border-radius:3px;background:var(--ink-2);
+  transform-origin:center;transition:transform .6s cubic-bezier(.3,.9,.3,1.05);
+}
+.beam .pan{
+  position:absolute;top:-9px;width:54px;text-align:center;
+  font-family:var(--figures);font-size:.62rem;font-weight:600;letter-spacing:.1em;color:var(--ink-2);
+  background:var(--paper-high);border:1px solid var(--rule-firm);border-radius:7px;padding:3px 0;
+  box-shadow:0 2px 4px rgba(63,48,18,.1);
+}
+.beam .pan.dr{left:-16px}.beam .pan.cr{right:-16px}
+.beam .fulcrum{
+  position:absolute;left:50%;top:27px;transform:translateX(-50%);
+  width:0;height:0;border-left:11px solid transparent;border-right:11px solid transparent;
+  border-bottom:22px solid var(--rule-firm);
+}
+.beam .glow{position:absolute;inset:-8px;border-radius:50%;opacity:0;transition:opacity .6s;
+  background:radial-gradient(closest-side, rgba(46,124,106,.22), transparent)}
+.entry-card.balanced .beam .glow{opacity:1}
+.entry-card.balanced .beam .bar{background:var(--jade)}
+.beam-word{
+  position:absolute;left:0;right:0;bottom:0;
+  text-align:center;font-family:var(--display);font-style:italic;font-size:.86rem;color:var(--ink-3);
+  transition:color .4s;min-height:1.3em;
+}
+.entry-card.balanced .beam-word{color:var(--jade-deep)}
+
+.btn{display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:.92rem;
+  padding:13px 24px;border-radius:12px;transition:transform .15s,box-shadow .2s,background .2s,opacity .2s}
+.btn:active{transform:scale(.97)}
+.btn-post{background:var(--ink);color:var(--paper-high);box-shadow:0 2px 6px rgba(33,48,63,.25)}
+.btn-post:hover:not(:disabled){background:#162330}
+.btn-post:disabled{opacity:.35;cursor:not-allowed;box-shadow:none}
+.entry-card.balanced .btn-post{background:var(--jade)}
+.entry-card.balanced .btn-post:hover{background:var(--jade-deep)}
+
+/* ───────── posted journal (ink ledger) ───────── */
+.posted{background:var(--paper-raised);border:1px solid var(--rule-soft);border-radius:20px;box-shadow:var(--shadow-1);padding:26px 32px}
+.posted h3{font-family:var(--figures);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:14px}
+.pentry{border-bottom:1px solid var(--rule-soft);padding:13px 2px}
+.pentry:last-child{border-bottom:none}
+.pline{display:grid;grid-template-columns:minmax(0,1fr) 120px 120px;gap:12px;font-size:.88rem;padding:2px 0}
+.pline .acct.cr{padding-left:32px;color:var(--ink-2)}
+.pline .amt{font-family:var(--figures);text-align:right;font-variant-numeric:tabular-nums}
+.pentry .pmeta{font-family:var(--figures);font-size:.68rem;color:var(--ink-4);margin-top:5px;display:flex;gap:10px;align-items:center}
+.pentry .pmeta .stamp{color:var(--jade-deep);border:1px solid rgba(46,124,106,.35);border-radius:5px;padding:1px 7px;
+  font-size:.6rem;letter-spacing:.1em;transform:rotate(-2deg);display:inline-block}
+.pentry.inking{animation:inkin .8s cubic-bezier(.2,.7,.2,1) both}
+@keyframes inkin{from{opacity:0;clip-path:inset(0 100% 0 0);background:var(--jade-wash)}60%{background:var(--jade-wash)}to{opacity:1;clip-path:inset(0 0 0 0);background:transparent}}
+
+/* ───────── right rail ───────── */
+.rail{display:flex;flex-direction:column;gap:18px;position:sticky;top:22px;animation:rise .5s .16s cubic-bezier(.2,.7,.2,1) both}
+.tacct{background:var(--paper-raised);border:1px solid var(--rule-soft);border-radius:16px;box-shadow:var(--shadow-1);padding:18px 20px}
+.tacct h4{font-family:var(--display);font-weight:600;font-size:.95rem;text-align:center;padding-bottom:8px;border-bottom:2px solid var(--ink)}
+.tcols{display:grid;grid-template-columns:1fr 1fr;min-height:64px}
+.tcols .side{padding:8px 10px;font-family:var(--figures);font-size:.78rem;font-variant-numeric:tabular-nums}
+.tcols .side.dr{border-right:2px solid var(--ink);text-align:left}
+.tcols .side.cr{text-align:right}
+.tcols .side div{padding:2px 0;color:var(--ink-2)}
+.tcols .side div.new{animation:inkin .8s cubic-bezier(.2,.7,.2,1) both;color:var(--ink);font-weight:600}
+.tacct .tbal{display:flex;justify-content:space-between;font-family:var(--figures);font-size:.7rem;color:var(--ink-3);
+  border-top:1px solid var(--rule);padding-top:7px;margin-top:2px}
+.tacct .tbal b{color:var(--ink);font-weight:600}
+
+/* sage */
+.sage{background:linear-gradient(168deg,#FBF9F0, #F2F0E2);border:1px solid var(--rule-soft);border-radius:16px;box-shadow:var(--shadow-1);padding:20px}
+.sage-id{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.sage-dot{width:28px;height:28px;border-radius:50%;flex:none;
+  background:radial-gradient(circle at 32% 30%, #4DA08C, var(--jade-deep));
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.25),0 2px 6px rgba(46,124,106,.3)}
+.sage-id .name{font-weight:600;font-size:.88rem}
+.sage-id .role{font-size:.7rem;color:var(--ink-3)}
+.sage p{font-family:var(--display);font-style:italic;font-size:.94rem;line-height:1.55;color:var(--ink-2)}
+.hint-veil{position:relative;margin-top:12px;border-radius:10px;overflow:hidden}
+.hint-veil p{padding:12px 14px;background:var(--paper-high);border:1px solid var(--rule);border-radius:10px;
+  filter:blur(5px);transition:filter .5s ease;user-select:none}
+.hint-veil.open p{filter:none;user-select:auto}
+.hint-veil button{
+  position:absolute;inset:0;display:grid;place-items:center;font-size:.78rem;font-weight:600;color:var(--jade-deep);
+  background:rgba(252,250,242,.25);transition:opacity .3s}
+.hint-veil.open button{opacity:0;pointer-events:none}
+
+@media (max-width:780px){
+  .spine{flex-wrap:wrap;padding:14px 18px}
+  .desk{padding:20px 18px 50px;gap:18px}
+  .entry-card{padding:22px 18px}
+  .jhead,.jrow,.jtotals{grid-template-columns:minmax(0,1fr) 92px 92px 26px;gap:8px}
+  .pline{grid-template-columns:minmax(0,1fr) 86px 86px;gap:8px}
+  .beam-zone{flex-direction:column;gap:8px}
+  .rail{position:static}
+}
+
+[data-theme="dark"]{
+  --paper:#14181F; --paper-raised:#1B212A; --paper-high:#232B36; --paper-sunken:#10141A;
+  --rule:#2B3440; --rule-soft:#242C37; --rule-firm:#3B4757;
+  --ink:#E9E4D6; --ink-2:#B0AA9B; --ink-3:#7E7A6E; --ink-4:#54514A;
+  --jade:#4DA08C; --jade-deep:#7FC4B1; --jade-wash:rgba(77,160,140,.16);
+  --redink:#D06A57; --redink-wash:rgba(208,106,87,.14);
+  --brass:#C49A4A; --brass-wash:rgba(196,154,74,.16);
+  --shadow-1:0 0 0 1px rgba(0,0,0,.25); --shadow-2:0 4px 16px rgba(0,0,0,.35); --shadow-3:0 10px 36px rgba(0,0,0,.45);
+}
+[data-theme="dark"] body{background-image:radial-gradient(ellipse 80% 50% at 50% -10%, rgba(77,160,140,.06), transparent)}
+.theme-btn{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;color:var(--ink-2);border:1px solid var(--rule);transition:.18s;flex:none;cursor:pointer;background:none}
+.theme-btn:hover{background:var(--paper-sunken);color:var(--ink)}
+.theme-btn .sun{display:none}
+[data-theme="dark"] .theme-btn .sun{display:block}
+[data-theme="dark"] .theme-btn .moon{display:none}
+
+[data-theme="dark"] .btn-post:hover:not(:disabled){background:var(--ink);filter:brightness(1.12)}
+[data-theme="dark"] .sage{background:linear-gradient(168deg,#1E2630,#19202A)}
+[data-theme="dark"] .hint-veil button{background:rgba(20,24,31,.25)}
+[data-theme="dark"] .entry-card.balanced .btn-post{color:#0F1318}
+[data-theme="dark"] .entry-card.balanced .btn-post:hover{background:var(--jade-deep);filter:none}
+.posted h3{display:flex;justify-content:space-between;align-items:baseline}
+.posted h3 a{color:var(--jade-deep);letter-spacing:.08em;font-weight:600}
+.posted h3 a:hover{text-decoration:underline}
+/* playful layer */
+@keyframes settle{0%{transform:rotate(2.4deg)}30%{transform:rotate(-1.6deg)}60%{transform:rotate(.8deg)}100%{transform:rotate(0)}}
+.entry-card.just-balanced .beam .bar{animation:settle .7s cubic-bezier(.3,.7,.3,1)}
+.beam .ring{position:absolute;left:50%;top:26px;width:12px;height:12px;border-radius:50%;border:2px solid var(--jade);transform:translate(-50%,-50%);opacity:0;pointer-events:none}
+.entry-card.just-balanced .beam .ring{animation:ringout .8s ease-out}
+@keyframes ringout{0%{opacity:.7;transform:translate(-50%,-50%) scale(.4)}100%{opacity:0;transform:translate(-50%,-50%) scale(5)}}
+.beam-zone{position:relative}
+.splat{position:absolute;width:6px;height:6px;border-radius:50%;background:var(--jade);pointer-events:none;animation:splatout .65s ease-out forwards}
+@keyframes splatout{0%{opacity:.9;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.35)}}
+.entry-card.posted-bump{animation:bump .45s cubic-bezier(.2,.8,.3,1.4)}
+@keyframes bump{0%{transform:scale(1)}35%{transform:scale(1.012)}100%{transform:scale(1)}}
+.receipt{transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.receipt:hover{transform:rotate(0deg) translateY(-2px)}
+.entry:hover .mark.ok{transform:rotate(2deg) scale(1.08)}
+/* exaggerated paper: fiber grain over everything */
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23g)' opacity='0.08'/%3E%3C/svg%3E");
+  mix-blend-mode:multiply;opacity:.55}
+[data-theme="dark"] body::after{opacity:.18}
+.anum{font-family:var(--figures);font-size:.58rem;font-weight:500;color:var(--ink-3);border:1px solid var(--rule-firm);border-radius:4px;padding:1px 5px;margin-right:7px;vertical-align:2px;letter-spacing:.04em}
+
+/* the journal as physical paper */
+.entry-card{position:relative}
+.entry-card::before{content:'';position:absolute;left:20px;top:18px;bottom:18px;width:1px;background:rgba(184,67,47,.30);pointer-events:none}
+.posted{position:relative}
+.posted::before{content:'';position:absolute;left:18px;top:16px;bottom:16px;width:1px;background:rgba(184,67,47,.22);pointer-events:none}
+.jrow input{background:transparent;border:0;border-bottom:1px solid var(--rule-firm);border-radius:0;padding:10px 8px;cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24'%3E%3Cpath d='M12 22C8 17 5 14 5 10a7 7 0 0 1 14 0c0 4-3 7-7 12Z' fill='%2321303F'/%3E%3Ccircle cx='12' cy='10' r='1.7' fill='%232E7C6A'/%3E%3C/svg%3E") 11 21, text}
+.jrow input:hover{border-color:transparent;border-bottom-color:var(--ink-3)}
+.jrow input:focus{outline:none;background:transparent;border-color:transparent;border-bottom-color:var(--jade);box-shadow:0 1px 0 var(--jade)}
+.jrow input.amt,.jhead .num{border-left:1px solid var(--rule)}
+.jhead .num{padding-left:10px}
+.jtotals .sum{border-left:1px solid var(--rule);padding-left:10px}
+.pline .amt{border-left:1px solid var(--rule-soft)}
+[data-theme="dark"] .jrow input{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24'%3E%3Cpath d='M12 22C8 17 5 14 5 10a7 7 0 0 1 14 0c0 4-3 7-7 12Z' fill='%23E9E4D6'/%3E%3Ccircle cx='12' cy='10' r='1.7' fill='%234DA08C'/%3E%3C/svg%3E") 11 21, text}
+/* drop cap on the story */
+#storyText::first-letter{font-family:var(--display);font-weight:600;font-style:normal;font-size:2.9em;float:left;line-height:.82;padding:4px 8px 0 0;color:var(--jade-deep)}
+/* brass paperclip on the source document */
+.receipt::after{content:'';position:absolute;top:-13px;left:16px;width:17px;height:42px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='48' viewBox='0 0 20 48'%3E%3Cpath d='M6 12v24a4 4 0 0 0 8 0V8a5 5 0 0 0-10 0v26' fill='none' stroke='%23A0782B' stroke-width='2.2' stroke-linecap='round' opacity='0.85'/%3E%3C/svg%3E") no-repeat center/contain;
+  transform:rotate(5deg);pointer-events:none}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.sage-dot{animation:bob 4.5s ease-in-out infinite}
+.tacct{transition:border-color .2s ease,box-shadow .2s ease,transform .2s ease}
+.tacct.hl{border-color:rgba(46,124,106,.55);box-shadow:0 0 0 3px rgba(46,124,106,.12);transform:translateY(-2px)}
+.pline{transition:background .15s ease;border-radius:6px}
+.pline:hover{background:var(--jade-wash)}
+/* custom account combobox */
+.acct-wrap{position:relative}
+.jrow input.acct.invalid{border-bottom-color:var(--redink);box-shadow:0 1px 0 var(--redink)}
+.ac-menu{position:absolute;left:0;right:0;top:calc(100% + 4px);z-index:40;
+  background:var(--paper-high);border:1px solid var(--rule-firm);border-radius:10px;
+  box-shadow:var(--shadow-2);max-height:230px;overflow:auto;padding:5px;display:none}
+.ac-menu.open{display:block;animation:acpop .14s ease both}
+@keyframes acpop{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.ac-opt{display:flex;align-items:baseline;gap:9px;padding:8px 10px;border-radius:7px;cursor:pointer;font-size:.86rem}
+.ac-opt:hover,.ac-opt.act{background:var(--jade-wash)}
+.ac-opt .no{font-family:var(--figures);font-size:.6rem;color:var(--ink-3);border:1px solid var(--rule-firm);border-radius:4px;padding:0 4px}
+.ac-opt .ty{margin-left:auto;font-family:var(--figures);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-4)}
+.ac-menu .none{padding:9px 10px;font-size:.82rem;color:var(--ink-3);font-style:italic;font-family:var(--display)}
+.acct-bad{font-family:var(--figures);font-size:.66rem;color:var(--redink);margin:3px 0 0 2px;display:none}
+.acct-bad.show{display:block}
+/* deep-linkable account names */
+.acctlink{border-bottom:1px dotted var(--ink-4);cursor:help;transition:color .15s}
+.acctlink:hover{color:var(--jade-deep);border-bottom-color:var(--jade)}
+/* onboarding coachmark */
+.coach-veil{position:fixed;inset:0;background:rgba(33,48,63,.55);backdrop-filter:blur(2px);z-index:200;display:none}
+.coach-veil.on{display:block;animation:fade .25s ease both}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.coach{position:fixed;z-index:201;max-width:300px;background:var(--paper-high);border:1px solid var(--rule-soft);
+  border-radius:16px;box-shadow:var(--shadow-2);padding:20px 22px;display:none}
+.coach.on{display:block;animation:rise .3s cubic-bezier(.2,.7,.2,1) both}
+.coach .step{font-family:var(--figures);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--brass);margin-bottom:7px}
+.coach h4{font-family:var(--display);font-weight:600;font-size:1.1rem;margin-bottom:6px}
+.coach p{font-size:.86rem;color:var(--ink-2);margin-bottom:16px}
+.coach .row{display:flex;align-items:center;justify-content:space-between}
+.coach .dots{display:flex;gap:5px}
+.coach .dots i{width:6px;height:6px;border-radius:50%;background:var(--rule-firm)}
+.coach .dots i.on{background:var(--jade)}
+.coach .cbtn{font-weight:600;font-size:.84rem;color:#fff;background:var(--jade);padding:9px 16px;border-radius:10px;border:none;cursor:pointer}
+.coach .cbtn:hover{background:var(--jade-deep)}
+.coach .skip{font-size:.78rem;color:var(--ink-3);background:none;border:none;cursor:pointer}
+.coach .skip:hover{color:var(--ink)}
+.coach-spot{position:fixed;z-index:200;border-radius:14px;box-shadow:0 0 0 9999px rgba(33,48,63,.55);
+  pointer-events:none;transition:all .35s cubic-bezier(.2,.7,.2,1);display:none}
+.coach-spot.on{display:block}
+.sr-live{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+/* realistic source documents — same ink/paper palette */
+.receipt{font-family:var(--figures)}
+.receipt .rdoc{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px}
+.receipt .rfrom{font-family:var(--display);font-weight:600;font-size:.96rem;color:var(--ink);letter-spacing:-.01em}
+.receipt .rfrom small{display:block;font-family:var(--figures);font-weight:400;font-size:.6rem;letter-spacing:.04em;color:var(--ink-3);margin-top:2px;text-transform:none}
+.receipt .rtype{text-align:right;flex:none}
+.receipt .rtype .b{font-family:var(--figures);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2);border:1px solid var(--rule-firm);border-radius:4px;padding:2px 7px}
+.receipt .rtype .num{font-size:.6rem;color:var(--ink-3);margin-top:5px}
+.receipt .rmeta{display:grid;grid-template-columns:1fr 1fr;gap:2px 14px;font-size:.62rem;color:var(--ink-3);
+  border-top:1px dashed var(--rule-firm);border-bottom:1px dashed var(--rule-firm);padding:7px 0;margin-bottom:9px}
+.receipt .rmeta b{color:var(--ink-2);font-weight:500}
+.receipt .rcols{display:flex;justify-content:space-between;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-4);padding-bottom:3px}
+.receipt .rline{display:grid;grid-template-columns:1fr auto;gap:8px;font-size:.78rem;padding:3px 0}
+.receipt .rline .l{color:var(--ink-2)}
+.receipt .rline .l small{display:block;font-size:.6rem;color:var(--ink-4)}
+.receipt .rline .v{font-weight:600;font-variant-numeric:tabular-nums;text-align:right}
+.receipt .rsub{display:flex;justify-content:space-between;font-size:.68rem;color:var(--ink-3);padding:3px 0;border-top:1px solid var(--rule);margin-top:4px}
+.receipt .rsub span:last-child{font-variant-numeric:tabular-nums}
+.receipt .rtotal{display:flex;justify-content:space-between;font-size:.92rem;font-weight:600;
+  border-top:1px solid var(--ink);border-bottom:3px double var(--ink);padding:8px 0;margin-top:6px}
+.receipt .rtotal span:last-child{font-variant-numeric:tabular-nums}
+.receipt .rpaid{position:absolute;right:20px;bottom:42px;font-family:var(--figures);font-size:.74rem;letter-spacing:.18em;font-weight:600;
+  border:2px solid var(--redink);color:var(--redink);border-radius:7px;padding:4px 12px;transform:rotate(-11deg);opacity:.82;pointer-events:none}
+.receipt .rpaid.green{border-color:var(--jade);color:var(--jade-deep)}
+.receipt .rterms{font-size:.64rem;color:var(--redink);margin-top:11px;text-align:center;letter-spacing:.05em;line-height:1.5}
+.receipt .rfoot{font-size:.56rem;color:var(--ink-4);text-align:center;margin-top:8px;letter-spacing:.04em;font-style:normal}
+/* the read-the-clue card */
+.clue{background:var(--paper-high);border:1px solid var(--rule);border-left:3px solid var(--brass);
+  border-radius:0 12px 12px 0;padding:14px 16px;margin-bottom:18px}
+.clue .ch{display:flex;align-items:center;gap:8px;font-family:var(--figures);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--brass);margin-bottom:8px}
+.clue .ch svg{flex:none}
+.clue .cq{font-family:var(--display);font-size:.96rem;font-style:italic;color:var(--ink);margin-bottom:9px;line-height:1.45}
+.clue .cwhat{display:flex;gap:8px;font-size:.8rem;color:var(--ink-2);padding:3px 0}
+.clue .cwhat b{color:var(--ink);font-weight:600}
+.clue .cwhat .ar{color:var(--jade);flex:none;font-family:var(--figures)}
+
+/* ════════ CHIC LAYER ════════ */
+/* a slow living gradient breathing under the paper */
+body{position:relative}
+body::before{content:'';position:fixed;inset:-20% -20% auto -20%;height:62%;z-index:-1;pointer-events:none;
+  background:radial-gradient(60% 80% at 22% 0%, rgba(46,124,106,.10), transparent 60%),
+             radial-gradient(50% 70% at 82% 8%, rgba(160,120,43,.09), transparent 60%);
+  filter:blur(14px);animation:auraDrift 22s ease-in-out infinite alternate}
+[data-theme="dark"] body::before{background:radial-gradient(60% 80% at 22% 0%, rgba(77,160,140,.12), transparent 60%),radial-gradient(50% 70% at 82% 8%, rgba(196,154,74,.10), transparent 60%)}
+@keyframes auraDrift{0%{transform:translate3d(-2%,0,0) scale(1)}100%{transform:translate3d(3%,2%,0) scale(1.08)}}
+
+/* cursor-following spotlight, faint and classy */
+#chicGlow{position:fixed;width:520px;height:520px;border-radius:50%;left:0;top:0;z-index:0;pointer-events:none;
+  transform:translate(-50%,-50%);opacity:0;transition:opacity .6s ease;
+  background:radial-gradient(closest-side, rgba(46,124,106,.07), transparent 70%);mix-blend-mode:multiply}
+[data-theme="dark"] #chicGlow{background:radial-gradient(closest-side, rgba(127,196,177,.10), transparent 70%);mix-blend-mode:screen}
+
+/* entrance: rise + unblur, staggered by .chic-seq parent */
+.chic-in{opacity:0;transform:translateY(22px);filter:blur(6px)}
+.chic-in.lit{opacity:1;transform:none;filter:none;transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1),filter .8s ease}
+
+/* sheen sweep across cards on reveal + on hover */
+.chic-sheen{position:relative;overflow:hidden}
+.chic-sheen::after{content:'';position:absolute;top:-60%;left:-80%;width:55%;height:220%;pointer-events:none;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);transform:rotate(8deg) translateX(-30%);opacity:0}
+[data-theme="dark"] .chic-sheen::after{background:linear-gradient(100deg,transparent,rgba(255,255,255,.10),transparent)}
+.chic-sheen.lit::after{animation:sheen 1.5s cubic-bezier(.2,.7,.2,1) .25s}
+.chic-sheen:hover::after{animation:sheen 1s cubic-bezier(.2,.7,.2,1)}
+@keyframes sheen{0%{opacity:0;left:-80%}25%{opacity:1}100%{opacity:0;left:160%}}
+
+/* heading word reveal */
+.chic-word{display:inline-block;opacity:0;transform:translateY(.5em) rotate(2deg);
+  animation:wordUp .7s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes wordUp{to{opacity:1;transform:none}}
+
+/* magnetic / lift on interactive cards */
+.chic-mag{transition:transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s ease}
+
+/* link underline draw */
+a.chic-u{position:relative}
+a.chic-u::after{content:'';position:absolute;left:0;right:100%;bottom:-2px;height:1.5px;background:currentColor;
+  transition:right .3s cubic-bezier(.2,.7,.2,1);opacity:.6}
+a.chic-u:hover::after{right:0}
+
+/* nib logo: an ink drop that wells and falls, forever */
+.wordmark .nib,.spine .nib{overflow:visible}
+
+/* the closing double-rule animates its draw */
+.closing-rule div,.rule-div,.shelf-base{position:relative;overflow:hidden}
+
+/* buttons get a soft pulse-ready glow */
+.btn-jade,.btn-ink,.btn-post,.cc-check{position:relative;overflow:hidden}
+.btn-jade::after,.btn-ink::after,.cc-check::after{content:'';position:absolute;inset:0;border-radius:inherit;
+  background:radial-gradient(circle at var(--rx,50%) var(--ry,50%), rgba(255,255,255,.35), transparent 45%);opacity:0;transition:opacity .4s}
+.btn-jade:hover::after,.btn-ink:hover::after,.cc-check:hover::after{opacity:1}
+
+@media (prefers-reduced-motion:reduce){
+  body::before,#chicGlow{animation:none!important;display:none}
+  .chic-in{opacity:1!important;transform:none!important;filter:none!important}
+  .chic-word{opacity:1!important;transform:none!important;animation:none!important}
+  .chic-sheen::after{display:none}
+}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="spine">
+  <a class="back" href="dashboard.html">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M19 12H5m6 6-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    The Desk
+  </a>
+  <div class="scenario-id">
+    <h1>Driftwood Coffee Co.</h1>
+    <div class="day-ribbon" aria-label="Day 3 of 7">
+      <span class="stitch done"></span><span class="stitch done"></span><span class="stitch done"></span>
+      <span class="stitch"></span><span class="stitch"></span><span class="stitch"></span><span class="stitch"></span>
+    </div>
+  </div>
+  <div class="right">
+    <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle dark mode" title="Lamplight">
+      <svg class="moon" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+      <svg class="sun" width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2m0 16v2M4 12H2m20 0h-2m-2.9-7.1-1.4 1.4M6.3 17.7l-1.4 1.4m0-14.2 1.4 1.4m11.4 11.4 1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+    <a class="back" href="library.html" title="Account reference">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2Zm0 0a2 2 0 0 0 2 2h13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Library
+    </a>
+    <div class="tb-chip"><span class="pulse"></span>Trial balance · in balance</div>
+  </div>
+</header>
+
+<main class="desk">
+
+  <!-- STORY -->
+  <aside class="story">
+    <p class="panel-label">The story so far</p>
+    <div class="story-card">
+      <p class="when" id="storyWhen">Day 3 · 7:40 AM</p>
+      <p id="storyText">A delivery van idles outside before opening. <strong>Mara, the owner,</strong> signs for twenty kilos of single-origin beans from her Sagada supplier. She winces at the invoice. <strong>"Put it on our account,"</strong> she says. "We'll settle after the surf crowd arrives."</p>
+    </div>
+    <div class="clue" id="clue" aria-label="Reading the transaction">
+      <p class="ch"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 1 9 9c0 3.5-2 5-3.5 6.2-.8.6-1.5 1.1-1.5 1.8v.5h-8v-.5c0-.7-.7-1.2-1.5-1.8C5 17 3 15.5 3 12a9 9 0 0 1 9-9Z" stroke="currentColor" stroke-width="1.6"/><path d="M9.5 22h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Read the clue</p>
+      <p class="cq" id="clueQ"></p>
+      <div id="clueWhat"></div>
+    </div>
+    <div class="receipt" id="receipt" aria-label="Source document">
+      <div class="rhead"><span>Invoice #1042</span><span>Kiltepan Beans</span></div>
+      <div class="rline"><span class="l">Arabica, washed · 20 kg</span><span class="v">11,800</span></div>
+      <div class="rline"><span class="l">Delivery, La Union</span><span class="v">700</span></div>
+      <div class="rtotal"><span>TOTAL DUE</span><span>₱12,500</span></div>
+      <p class="rterms">TERMS: NET 30 · NO PAYMENT RECEIVED</p>
+    </div>
+    <p class="txn-count" id="txnCount">Transaction 4 of 5 · Day 3</p>
+  </aside>
+
+  <!-- JOURNAL -->
+  <section class="journal">
+    <p class="panel-label">General journal</p>
+
+    <div class="entry-card" id="entryCard">
+      <div class="entry-head">
+        <h2 id="entryTitle">Record the bean delivery</h2>
+        <span class="date" id="entryMeta">June 11 · GJ-0012</span>
+      </div>
+
+      <div class="jhead">
+        <span>Account</span><span class="num">Debit</span><span class="num">Credit</span><span></span>
+      </div>
+
+      <div id="rows"></div>
+
+      <button class="addline" onclick="addRow()">＋ Add a line</button>
+
+      <div class="jtotals">
+        <span class="lbl">Totals</span>
+        <span class="sum" id="sumDr">12,500</span>
+        <span class="sum" id="sumCr">0</span>
+        <span></span>
+      </div>
+
+      <div class="beam-zone">
+        <div class="beam-stage">
+          <div class="beam" aria-hidden="true">
+            <span class="glow"></span>
+            <span class="ring"></span>
+            <div class="bar" id="beamBar">
+              <span class="pan dr">DR</span>
+              <span class="pan cr">CR</span>
+            </div>
+            <span class="fulcrum"></span>
+            <p class="beam-word" id="beamWord" aria-live="polite">leaning to the debit side…</p>
+          </div>
+        </div>
+        <button class="btn btn-post" id="postBtn" disabled onclick="postEntry()">
+          Post entry
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- posted ledger -->
+    <div class="posted">
+      <h3><span>Posted today · Day 3</span><a href="review.html">CLOSE THE DAY →</a></h3>
+      <div id="postedList">
+        <div class="pentry">
+          <div class="pline"><span class="acct"><a class="acctlink" href="library.html#101">Cash</a></span><span class="amt">9,300</span><span class="amt"></span></div>
+          <div class="pline"><span class="acct cr"><a class="acctlink" href="library.html#401">Sales Revenue</a></span><span class="amt"></span><span class="amt">9,300</span></div>
+          <div class="pmeta"><span>GJ-0011 · 7:05 AM</span><span class="stamp">BALANCED</span><span>Morning till count</span></div>
+        </div>
+        <div class="pentry">
+          <div class="pline"><span class="acct"><a class="acctlink" href="library.html#510">Rent Expense</a></span><span class="amt">6,000</span><span class="amt"></span></div>
+          <div class="pline"><span class="acct cr"><a class="acctlink" href="library.html#101">Cash</a></span><span class="amt"></span><span class="amt">6,000</span></div>
+          <div class="pmeta"><span>GJ-0010 · 6:48 AM</span><span class="stamp">BALANCED</span><span>June rent, paid early</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RAIL -->
+  <aside class="rail">
+    <p class="panel-label" style="margin-bottom:-6px">Live ledger</p>
+
+    <div id="tAccounts"></div>
+
+    <div class="sage">
+      <div class="sage-id">
+        <span class="sage-dot"></span>
+        <div><p class="name">Sage</p><p class="role">Watching the books with you</p></div>
+      </div>
+      <p id="sageText">"Mara received value today but paid nothing. One side of this entry is about what came in. The other is about what she now owes."</p>
+      <div class="hint-veil" id="hintVeil">
+        <p id="hintText">Debit Inventory ₱12,500 for the beans received. Credit Accounts Payable ₱12,500 for the promise to pay Kiltepan within 30 days.</p>
+        <button onclick="document.getElementById('hintVeil').classList.add('open')">Reveal the full hint</button>
+      </div>
+    </div>
+  </aside>
+
+
+<div class="coach-veil" id="coachVeil"></div>
+<div class="coach-spot" id="coachSpot"></div>
+<div class="coach" id="coach" role="dialog" aria-modal="true" aria-labelledby="coachTitle">
+  <p class="step" id="coachStep">Step 1 of 4</p>
+  <h4 id="coachTitle"></h4>
+  <p id="coachBody"></p>
+  <div class="row">
+    <button class="skip" onclick="endCoach()">Skip tour</button>
+    <div style="display:flex;align-items:center;gap:14px">
+      <div class="dots" id="coachDots"></div>
+      <button class="cbtn" id="coachNext" onclick="coachNextStep()">Next</button>
+    </div>
+  </div>
+</div>
+<p class="sr-live" id="srLive" aria-live="polite"></p>
+</main>
+
+<script>
+function toggleTheme(){const r=document.documentElement;const d=r.dataset.theme==='dark';
+  if(d)delete r.dataset.theme;else r.dataset.theme='dark';
+  try{localStorage.setItem('lgly-theme',d?'':'dark')}catch(e){}}
+const card=document.getElementById('entryCard');
+const rowsEl=document.getElementById('rows');
+const sumDrEl=document.getElementById('sumDr'), sumCrEl=document.getElementById('sumCr');
+const beamBar=document.getElementById('beamBar'), beamWord=document.getElementById('beamWord');
+const postBtn=document.getElementById('postBtn');
+
+const fmt=n=>n.toLocaleString('en-PH');
+const parse=v=>{const n=parseFloat(String(v).replace(/[^0-9.]/g,''));return isNaN(n)?0:n};
+const $id=x=>document.getElementById(x);
+let gjN=12, txnIdx=0;
+let wasBalanced=false, lastSide='', curLean='';
+const BAL_QUIPS=['perfectly in balance','steady — the beam approves','both sides agree. rare, beautiful.','equilibrium, achieved'];
+const DR_LEAN=['leaning to the debit side','the debits are heavier','listing left — debits winning'];
+const CR_LEAN=['leaning to the credit side','the credits are heavier','listing right — credits winning'];
+
+const TXNS=[
+ {title:"Record the bean delivery", when:"Day 3 · 7:40 AM",
+  story:'A delivery van idles outside before opening. <strong>Mara, the owner,</strong> signs for twenty kilos of single-origin beans from her Sagada supplier. She winces at the invoice. <strong>"Put it on our account,"</strong> she says. "We\'ll settle after the surf crowd arrives."',
+  clueQ:'She received goods but handed over no cash — so something she <em>owns</em> went up, and something she <em>owes</em> went up with it.',
+  clue:[['Beans arrive (an asset)','DEBIT Inventory'],['Promise to pay later (a debt)','CREDIT Accounts Payable']],
+  receipt:{kind:'invoice',from:'Kiltepan Beans Co.',fromSub:'Sagada, Mountain Province · VAT Reg',type:'SALES INVOICE',num:'No. 1042',meta:[['Date','Jun 11, 2026'],['Sold to','Driftwood Coffee'],['Terms','Net 30'],['Due','Jul 11, 2026']],
+    lines:[['Arabica, washed','20 kg @ ₱590','11,800'],['Delivery — La Union','freight','700']],
+    total:['TOTAL DUE','₱12,500'],terms:'PAYABLE WITHIN 30 DAYS · NO PAYMENT RECEIVED',foot:'Thank you for sourcing local.'},
+  memo:'Bean delivery, Kiltepan inv. #1042',
+  sage:'"Mara received value today but paid nothing. One side of this entry is about what came in. The other is about what she now owes."',
+  hint:'Debit Inventory ₱12,500 for the beans received. Credit Accounts Payable ₱12,500 for the promise to pay Kiltepan within 30 days.',
+  prefill:{acct:'Inventory — Coffee Beans',dr:'12,500',crPlaceholder:'Which account did Driftwood promise?'}},
+
+ {title:"Record the day's coffee sales", when:"Day 3 · 11:15 AM",
+  story:'The morning rush hits. Surfers, remote workers, one very loud tour group. By late morning the register tape reads <strong>₱9,300</strong>, all of it cash and card settled on the spot. <strong>"Now that,"</strong> Mara grins, <strong>"is why we open early."</strong>',
+  clueQ:'Money came in <em>today</em> for coffee handed over <em>today</em>. Cash rises — and the business has genuinely earned it.',
+  clue:[['Cash collected now (an asset)','DEBIT Cash'],['Coffee delivered, value earned','CREDIT Sales Revenue']],
+  receipt:{kind:'z',from:'Driftwood Coffee Co.',fromSub:'POS Terminal 1 · Daily Z-Reading',type:'Z-REPORT',num:'Z-0061',meta:[['Date','Jun 11, 2026'],['Shift','AM'],['Transactions','142'],['Cashier','Mara R.']],
+    lines:[['Brewed & espresso','118 items','7,420'],['Pastries & retail','24 items','1,880']],
+    total:['GROSS SALES','₱9,300'],terms:'',paid:'SETTLED',foot:'Cash ₱5,100 · Card ₱4,200 · drawer reconciled'},
+  memo:'Morning counter sales, Z-0061',
+  sage:'"The simplest entry there is, and the one a business makes most. Value left the counter, money arrived. Recognize the revenue the moment it\'s earned."',
+  hint:'Debit Cash ₱9,300 for the money taken in. Credit Sales Revenue ₱9,300 — earned the instant the coffee crossed the counter.',
+  prefill:null},
+
+ {title:"Record the catering deposit", when:"Day 3 · 2:00 PM",
+  story:'A resort books Driftwood to cater a launch party next week and pays <strong>₱6,000 up front</strong>. <strong>"Hold the date,"</strong> the planner says. Mara pockets the cash — but the coffee won\'t be poured until next Thursday.',
+  clueQ:'Cash arrived, but the work hasn\'t happened yet. She holds the money <em>and</em> a promise to deliver later. A promise owed is a liability.',
+  clue:[['Cash received now (an asset)','DEBIT Cash'],['Service still owed to the client','CREDIT Unearned Revenue']],
+  receipt:{kind:'or',from:'Driftwood Coffee Co.',fromSub:'Official Receipt · BIR Registered',type:'OFFICIAL RECEIPT',num:'OR-2207',meta:[['Date','Jun 11, 2026'],['Received from','Azure Resort'],['For','Catering — Jun 18'],['Status','Advance']],
+    lines:[['Event catering deposit','50% of ₱12,000','6,000']],
+    total:['AMOUNT RECEIVED','₱6,000'],terms:'BALANCE ₱6,000 DUE ON SERVICE DATE',paid:'PAID',paidGreen:true,foot:'Service not yet rendered.'},
+  memo:'Catering deposit, Azure Resort, OR-2207',
+  sage:'"This is the entry that trips everyone. Cash went up, yes — but receiving money for work you haven\'t done is a debt, not revenue. You owe them coffee."',
+  hint:'Debit Cash ₱6,000 for the advance. Credit Unearned Revenue ₱6,000 — a liability, because the service is still owed.',
+  prefill:null},
+
+ {title:"Record the partial payment to Kiltepan", when:"Day 3 · 5:30 PM",
+  story:'Closing time. Mara counts the till, then wires <strong>₱3,000</strong> to Kiltepan against the balance she owes. <strong>"Small, but on time,"</strong> she says. "That\'s how they keep answering my calls."',
+  clueQ:'Money leaves to pay down a debt. Cash falls — and what she <em>owes</em> falls with it. No expense here; she\'s settling an old bill.',
+  clue:[['Debt to supplier shrinks','DEBIT Accounts Payable'],['Cash leaves the bank','CREDIT Cash']],
+  receipt:{kind:'bank',from:'BPI Online',fromSub:'Funds Transfer Confirmation',type:'DEBIT ADVICE',num:'Ref 88412-DW',meta:[['Date','Jun 11, 2026'],['From','Driftwood Coffee'],['To','Kiltepan Beans'],['Channel','InstaPay']],
+    lines:[['Transfer to supplier','partial settlement','3,000']],
+    total:['AMOUNT DEBITED','₱3,000'],terms:'',paid:'SENT',paidGreen:true,foot:'Applied against Invoice #1031 balance.'},
+  memo:'Partial payment to Kiltepan, ref 88412-DW',
+  sage:'"Paying a supplier shrinks two things at once: what the business owes, and what it holds. No expense touches this — the cost was recorded when the goods arrived, not when you pay."',
+  hint:'Debit Accounts Payable ₱3,000 — the debt shrinks. Credit Cash ₱3,000 — the money leaves.',
+  prefill:null},
+
+ {title:"Record the barista wages", when:"Day 3 · 6:00 PM",
+  story:'The two weekend baristas clock out and Mara pays their shift in cash — <strong>₱3,600</strong> for the hours already worked. <strong>"Worked the rush, earned the pay,"</strong> she says, counting out the bills.',
+  clueQ:'The work is already done, so the cost belongs to <em>today</em>. Cash leaves to cover it. This time it genuinely <em>is</em> an expense.',
+  clue:[['Labor consumed today (a cost)','DEBIT Wages Expense'],['Cash paid out','CREDIT Cash']],
+  receipt:{kind:'pay',from:'Driftwood Coffee Co.',fromSub:'Payroll Voucher · Weekend Shift',type:'CASH VOUCHER',num:'PV-0088',meta:[['Date','Jun 11, 2026'],['Paid to','2 baristas'],['Period','Jun 10–11'],['Method','Cash']],
+    lines:[['Barista — A. Cruz','11 hrs','1,980'],['Barista — J. Lim','9 hrs','1,620']],
+    total:['TOTAL PAID','₱3,600'],terms:'',paid:'PAID',paidGreen:true,foot:'Hours worked, received in full.'},
+  memo:'Weekend barista wages, PV-0088',
+  sage:'"Wages are recognized when the work happens. They worked today, so the cost is today\'s — a clean expense paid in cash."',
+  hint:'Debit Wages Expense ₱3,600 for the labor used today. Credit Cash ₱3,600 for the payout.',
+  prefill:null},
+];
+
+function renderReceipt(r){
+  const meta=(r.meta||[]).map(m=>`<div><b>${m[0]}:</b> ${m[1]}</div>`).join('');
+  const lines=r.lines.map(l=>l.length===3
+    ? `<div class="rline"><span class="l">${l[0]}<small>${l[1]}</small></span><span class="v">${l[2]}</span></div>`
+    : `<div class="rline"><span class="l">${l[0]}</span><span class="v">${l[1]}</span></div>`).join('');
+  return `<div class="rdoc">
+      <div class="rfrom">${r.from}<small>${r.fromSub||''}</small></div>
+      <div class="rtype"><span class="b">${r.type}</span><div class="num">${r.num||''}</div></div>
+    </div>
+    ${meta?`<div class="rmeta">${meta}</div>`:''}
+    <div class="rcols"><span>Description</span><span>Amount</span></div>
+    ${lines}
+    <div class="rtotal"><span>${r.total[0]}</span><span>${r.total[1]}</span></div>
+    ${r.terms?`<p class="rterms">${r.terms}</p>`:''}
+    ${r.paid?`<span class="rpaid${r.paidGreen?' green':''}">${r.paid}</span>`:''}
+    ${r.foot?`<p class="rfoot">${r.foot}</p>`:''}`;
+}
+function loadTxn(i){
+  const t=TXNS[i];
+  $id('storyWhen').textContent=t.when;
+  $id('storyText').innerHTML=t.story;
+  $id('receipt').innerHTML=renderReceipt(t.receipt);
+  // the clue card
+  $id('clueQ').innerHTML=t.clueQ;
+  $id('clueWhat').innerHTML=t.clue.map(c=>`<div class="cwhat"><span class="ar">${c[1].startsWith('DEBIT')?'Dr':'Cr'}</span><span><b>${c[1]}</b> — ${c[0]}</span></div>`).join('');
+  $id('txnCount').textContent='Transaction '+(i+1)+' of 5 · Day 3';
+  $id('entryTitle').textContent=t.title;
+  $id('entryMeta').textContent='June 11 · GJ-00'+gjN;
+  $id('sageText').innerHTML=t.sage;
+  $id('hintText').textContent=t.hint;
+  $id('hintVeil').classList.remove('open');
+  rowsEl.innerHTML='';
+  const r1=rowTemplate(false), r2=rowTemplate(true);
+  if(t.prefill){
+    r1.querySelector('.acct').value=t.prefill.acct;
+    r1.querySelector('.dr').value=t.prefill.dr;
+    r2.querySelector('.acct').placeholder=t.prefill.crPlaceholder;
+    markAcct(r1.querySelector('.acct'));
+  }
+  rowsEl.append(r1,r2);
+  wasBalanced=false;lastSide='';
+  recalc();
+  setTimeout(()=>{const tgt=rowsEl.querySelector('.jrow:last-child .acct');if(tgt&&!coachActive)tgt.focus({preventScroll:true})},60);
+}
+
+function dayComplete(){
+  $id('storyWhen').textContent='Day 3 · 6:10 PM';
+  $id('storyText').innerHTML='The lights go down on Driftwood. <strong>Five transactions, five clean entries.</strong> The books are ready to close.';
+  $id('receipt').style.display='none';
+  $id('clue').style.display='none';
+  $id('txnCount').textContent='All 5 recorded · Day 3 complete';
+  $id('entryTitle').textContent='The desk is clear';
+  $id('entryMeta').textContent='June 11 · end of day';
+  $id('sageText').innerHTML='"Every entry balanced on the day it happened. Close while it\'s fresh — the review is where the learning compounds."';
+  $id('hintVeil').style.display='none';
+  rowsEl.innerHTML='';
+  const r1=rowTemplate(false), r2=rowTemplate(true);
+  rowsEl.append(r1,r2);
+  rowsEl.querySelectorAll('input,button').forEach(el=>el.disabled=true);
+  document.querySelector('.addline').disabled=true;
+  recalc();
+  card.classList.add('balanced');
+  beamWord.textContent='desk clear, ink dry — go close the books';
+  postBtn.disabled=false;
+  postBtn.innerHTML='Review & close →';
+  postBtn.onclick=()=>location.href='review.html';
+}
+
+function recalc(){
+  let dr=0,cr=0,named=true;
+  rowsEl.querySelectorAll('.jrow').forEach(r=>{
+    const d=parse(r.querySelector('.dr').value), c=parse(r.querySelector('.cr').value);
+    dr+=d; cr+=c;
+    const an=r.querySelector('.acct').value.trim();
+    if((d||c)&&!COA_NAMES.includes(an))named=false;
+  });
+  sumDrEl.textContent=fmt(dr); sumCrEl.textContent=fmt(cr);
+  const diff=dr-cr, max=Math.max(dr,cr,1);
+  const tilt=Math.max(-7,Math.min(7,(diff/max)*7));
+  beamBar.style.transform=`rotate(${-tilt}deg)`;
+  const even=dr>0&&dr===cr, balanced=even&&named;
+  card.classList.toggle('balanced',balanced);
+  sumDrEl.classList.toggle('even',even);
+  sumCrEl.classList.toggle('even',even);
+  postBtn.disabled=!balanced;
+  if(balanced){
+    if(!wasBalanced){
+      beamWord.textContent=BAL_QUIPS[Math.floor(Math.random()*BAL_QUIPS.length)];
+      card.classList.remove('just-balanced');void card.offsetWidth;card.classList.add('just-balanced');
+    }
+  } else if(even){
+    beamWord.textContent='in balance — now name the accounts';
+  } else if(dr===0&&cr===0){
+    beamWord.textContent='waiting for ink…';
+    lastSide='';
+  } else {
+    const side=diff>0?'dr':'cr';
+    if(side!==lastSide){
+      const pool=side==='dr'?DR_LEAN:CR_LEAN;
+      curLean=pool[Math.floor(Math.random()*pool.length)];
+      lastSide=side;
+    }
+    beamWord.textContent=`${curLean} · off by ₱${fmt(Math.abs(diff))}`;
+  }
+  wasBalanced=balanced;
+}
+
+const COA=[
+ {no:'101',name:'Cash',type:'Asset'},
+ {no:'110',name:'Accounts Receivable',type:'Asset'},
+ {no:'120',name:'Inventory — Coffee Beans',type:'Asset'},
+ {no:'125',name:'Supplies',type:'Asset'},
+ {no:'130',name:'Prepaid Rent',type:'Asset'},
+ {no:'150',name:'Equipment',type:'Asset'},
+ {no:'201',name:'Accounts Payable',type:'Liability'},
+ {no:'210',name:'Notes Payable',type:'Liability'},
+ {no:'220',name:'Unearned Revenue',type:'Liability'},
+ {no:'301',name:"Owner's Capital",type:'Equity'},
+ {no:'401',name:'Sales Revenue',type:'Revenue'},
+ {no:'501',name:'Cost of Goods Sold',type:'Expense'},
+ {no:'510',name:'Rent Expense',type:'Expense'},
+ {no:'520',name:'Wages Expense',type:'Expense'},
+];
+const COA_NAMES=COA.map(a=>a.name);
+const LIB_SLUG={'Cash':'101','Accounts Receivable':'110','Inventory — Coffee Beans':'120','Supplies':'125','Prepaid Rent':'130','Equipment':'150','Accounts Payable':'201','Notes Payable':'210','Unearned Revenue':'220',"Owner's Capital":'301','Sales Revenue':'401','Cost of Goods Sold':'501','Rent Expense':'510','Wages Expense':'520'};
+
+function rowTemplate(credit){
+  const d=document.createElement('div');
+  d.className='jrow'+(credit?' credit-row':'');
+  d.innerHTML=`<span class="acct-wrap">
+      <input class="acct" placeholder="Account name" aria-label="Account" autocomplete="off" role="combobox" aria-expanded="false">
+      <span class="ac-menu" role="listbox"></span>
+      <span class="acct-bad">not in the chart of accounts</span>
+    </span>
+    <input class="amt dr" inputmode="numeric" placeholder="–" aria-label="Debit amount">
+    <input class="amt cr" inputmode="numeric" placeholder="–" aria-label="Credit amount">
+    <button class="del" title="Remove line" onclick="removeRow(this)">×</button>`;
+  return d;
+}
+function addRow(){rowsEl.appendChild(rowTemplate(true));recalc()}
+function removeRow(btn){if(rowsEl.children.length>2)btn.closest('.jrow').remove();recalc()}
+
+function isValidAcct(v){return COA_NAMES.includes(v.trim())}
+function markAcct(input){
+  const ok=input.value.trim()==='' || isValidAcct(input.value);
+  input.classList.toggle('invalid',!ok);
+  input.closest('.acct-wrap').querySelector('.acct-bad').classList.toggle('show',!ok);
+  return ok;
+}
+function openMenu(input){
+  const menu=input.parentElement.querySelector('.ac-menu');
+  const q=input.value.trim().toLowerCase();
+  const used=[...rowsEl.querySelectorAll('.acct')].filter(a=>a!==input).map(a=>a.value.trim());
+  const hits=COA.filter(a=>(!q||a.name.toLowerCase().includes(q)||a.no.includes(q)));
+  menu.innerHTML = hits.length
+    ? hits.map(a=>`<span class="ac-opt" role="option" data-name="${a.name}"><span class="no">${a.no}</span>${a.name}<span class="ty">${a.type}</span></span>`).join('')
+    : '<div class="none">no account matches — debits and credits must name a real account</div>';
+  menu.classList.add('open');input.setAttribute('aria-expanded','true');
+}
+function closeMenu(input){
+  const menu=input.parentElement.querySelector('.ac-menu');
+  menu.classList.remove('open');input.setAttribute('aria-expanded','false');
+}
+
+rowsEl.addEventListener('input',e=>{
+  if(e.target.classList.contains('amt')){
+    const raw=parse(e.target.value);
+    if(e.target.value!=='') e.target.value=raw?fmt(raw):'';
+    const row=e.target.closest('.jrow');
+    const other=e.target.classList.contains('dr')?row.querySelector('.cr'):row.querySelector('.dr');
+    if(raw>0)other.value='';
+    row.classList.toggle('credit-row',parse(row.querySelector('.cr').value)>0);
+  }
+  if(e.target.classList.contains('acct')){openMenu(e.target);markAcct(e.target)}
+  recalc();
+});
+rowsEl.addEventListener('focusin',e=>{if(e.target.classList.contains('acct'))openMenu(e.target)});
+rowsEl.addEventListener('focusout',e=>{
+  if(e.target.classList.contains('acct')){
+    const inp=e.target;
+    setTimeout(()=>{closeMenu(inp);markAcct(inp);recalc()},140);
+  }
+});
+rowsEl.addEventListener('mousedown',e=>{
+  const opt=e.target.closest('.ac-opt');if(!opt)return;
+  e.preventDefault();
+  const wrap=opt.closest('.acct-wrap'), input=wrap.querySelector('.acct');
+  input.value=opt.dataset.name;markAcct(input);closeMenu(input);
+  const row=input.closest('.jrow');
+  (row.querySelector('.dr').value||row.querySelector('.cr').value)
+    ? input.closest('.jrow').querySelector('.amt.dr').focus() : 0;
+  recalc();
+});
+// keyboard nav inside the menu
+rowsEl.addEventListener('keydown',e=>{
+  if(!e.target.classList.contains('acct'))return;
+  const menu=e.target.parentElement.querySelector('.ac-menu');
+  if(!menu.classList.contains('open'))return;
+  const opts=[...menu.querySelectorAll('.ac-opt')];if(!opts.length)return;
+  let i=opts.findIndex(o=>o.classList.contains('act'));
+  if(e.key==='ArrowDown'){e.preventDefault();i=(i+1)%opts.length}
+  else if(e.key==='ArrowUp'){e.preventDefault();i=(i-1+opts.length)%opts.length}
+  else if(e.key==='Enter'&&i>-1){e.preventDefault();e.target.value=opts[i].dataset.name;markAcct(e.target);closeMenu(e.target);recalc();e.target.closest('.jrow').querySelector('.amt.dr').focus();return}
+  else if(e.key==='Escape'){closeMenu(e.target);return}
+  else return;
+  opts.forEach(o=>o.classList.remove('act'));opts[i].classList.add('act');opts[i].scrollIntoView({block:'nearest'});
+});
+
+// live ledger: opening balances carried into Day 3, normal side per account
+const LEDGER_STATE={
+  'Cash':              {no:'101',normal:'dr',open:48200},
+  'Inventory — Coffee Beans':{no:'120',normal:'dr',open:8400},
+  'Accounts Payable':  {no:'201',normal:'cr',open:3000},
+  'Sales Revenue':     {no:'401',normal:'cr',open:0},
+  'Unearned Revenue':  {no:'220',normal:'cr',open:0},
+  'Wages Expense':     {no:'520',normal:'dr',open:0},
+};
+function balLabel(s){
+  const net = s.normal==='dr' ? s.open + s.dr - s.cr : s.open + s.cr - s.dr;
+  const side = net>=0 ? s.normal.toUpperCase() : (s.normal==='dr'?'CR':'DR');
+  return '₱'+fmt(Math.abs(net))+' '+side;
+}
+function ensureTAccount(name){
+  let s=LEDGER_STATE[name]; if(!s)return null;
+  if(s.el)return s;
+  s.dr=0;s.cr=0;
+  const wrap=document.createElement('div');wrap.className='tacct';
+  wrap.innerHTML=`<h4><span class="anum">${s.no}</span>${name}</h4>
+    <div class="tcols"><div class="side dr"></div><div class="side cr"></div></div>
+    <div class="tbal"><span>Balance</span><b></b></div>`;
+  s.drEl=wrap.querySelector('.side.dr');s.crEl=wrap.querySelector('.side.cr');s.balEl=wrap.querySelector('.tbal b');
+  if(s.open){const o=document.createElement('div');o.textContent=fmt(s.open);(s.normal==='dr'?s.drEl:s.crEl).appendChild(o)}
+  s.balEl.textContent=balLabel(s);
+  document.getElementById('tAccounts').appendChild(wrap);
+  s.el=wrap;return s;
+}
+function tpost(name,amt,isDebit){
+  const s=ensureTAccount(name);if(!s)return;
+  if(isDebit)s.dr+=amt;else s.cr+=amt;
+  const c=document.createElement('div');c.className='new';c.textContent=fmt(amt);
+  (isDebit?s.drEl:s.crEl).appendChild(c);
+  s.balEl.textContent=balLabel(s);
+  s.el.classList.remove('hl');void s.el.offsetWidth;s.el.classList.add('hl');
+  setTimeout(()=>s.el.classList.remove('hl'),1200);
+}
+function splatter(){
+  const zone=document.querySelector('.beam-zone');
+  for(let k=0;k<7;k++){
+    const s=document.createElement('span');s.className='splat';
+    const a=Math.random()*Math.PI*2, d=26+Math.random()*36;
+    s.style.setProperty('--dx',(Math.cos(a)*d)+'px');
+    s.style.setProperty('--dy',(Math.sin(a)*d-12)+'px');
+    s.style.left=(postBtn.offsetLeft+postBtn.offsetWidth/2)+'px';
+    s.style.top=(postBtn.offsetTop+12)+'px';
+    zone.appendChild(s);setTimeout(()=>s.remove(),700);
+  }
+}
+function postEntry(){
+  const t=TXNS[txnIdx];
+  const list=document.getElementById('postedList');
+  const lines=[...rowsEl.querySelectorAll('.jrow')].map(r=>({
+    acct:r.querySelector('.acct').value.trim(),
+    dr:parse(r.querySelector('.dr').value), cr:parse(r.querySelector('.cr').value)
+  })).filter(l=>l.dr||l.cr);
+
+  const entry=document.createElement('div');
+  entry.className='pentry inking';
+  entry.innerHTML=lines.map(l=>
+    `<div class="pline"><span class="acct${l.cr?' cr':''}">${LIB_SLUG[l.acct]?`<a class="acctlink" href="library.html#${LIB_SLUG[l.acct]}">${l.acct}</a>`:l.acct}</span>
+     <span class="amt">${l.dr?fmt(l.dr):''}</span><span class="amt">${l.cr?fmt(l.cr):''}</span></div>`).join('')+
+    `<div class="pmeta"><span>GJ-00${gjN} · just now</span><span class="stamp">BALANCED</span><span>${t.memo}</span></div>`;
+  list.prepend(entry);
+  card.classList.remove('posted-bump');void card.offsetWidth;card.classList.add('posted-bump');
+  splatter();
+
+  // ripple into the T-accounts (any account in the ledger)
+  lines.forEach(l=>{
+    if(l.dr)tpost(l.acct,l.dr,true);
+    if(l.cr)tpost(l.acct,l.cr,false);
+  });
+
+  gjN++; txnIdx++;
+  if(txnIdx<TXNS.length){
+    loadTxn(txnIdx);
+    beamWord.textContent='posted — a new document just hit the desk';
+  } else {
+    dayComplete();
+  }
+}
+
+// Enter writes like a pen: next field, new line, or post
+rowsEl.addEventListener('keydown',e=>{
+  if(e.key!=='Enter')return;
+  e.preventDefault();
+  if(!postBtn.disabled){postEntry();return}
+  const inputs=[...rowsEl.querySelectorAll('input:not([disabled])')];
+  const i=inputs.indexOf(e.target);
+  if(i>-1&&i<inputs.length-1)inputs[i+1].focus();
+  else if(i===inputs.length-1){addRow();rowsEl.querySelector('.jrow:last-child .acct').focus()}
+});
+// hovering a posted line lights up its T-account
+const _posted=document.getElementById('postedList');
+_posted.addEventListener('mouseover',e=>{
+  const l=e.target.closest('.pline');if(!l)return;
+  const name=l.querySelector('.acct').textContent.trim();
+  document.querySelectorAll('.tacct').forEach(t=>t.classList.toggle('hl',!!name&&t.querySelector('h4').textContent.includes(name)));
+});
+_posted.addEventListener('mouseleave',()=>document.querySelectorAll('.tacct').forEach(t=>t.classList.remove('hl')));
+
+// ── onboarding coachmark (first visit only) ──
+let coachActive=false, coachIdx=0;
+const COACH=[
+ {sel:'.story', title:'Start with the story', body:'Every entry begins with something that happened to the business. Read the beat, then check the source document beneath it.'},
+ {sel:'#rows', title:'Write the entry', body:'Name an account, then type its amount in Debit or Credit. Pick from the chart of accounts — typing a name that doesn\'t exist won\'t post.'},
+ {sel:'.beam', title:'Watch the beam', body:'It tilts toward the heavier side as you type. When debits equal credits it settles level and glows. That\'s your signal the entry balances.'},
+ {sel:'#postBtn', title:'Post it', body:'Once it balances and every line is named, post. The entry inks into the ledger and ripples into the T-accounts on the right. Press Enter to post from the keyboard.'},
+];
+function startCoach(){
+  coachActive=true;coachIdx=0;
+  document.getElementById('coachVeil').classList.add('on');
+  document.getElementById('coach').classList.add('on');
+  document.getElementById('coachSpot').classList.add('on');
+  renderCoach();
+}
+function renderCoach(){
+  const c=COACH[coachIdx], el=document.querySelector(c.sel);
+  document.getElementById('coachStep').textContent=`Step ${coachIdx+1} of ${COACH.length}`;
+  document.getElementById('coachTitle').textContent=c.title;
+  document.getElementById('coachBody').textContent=c.body;
+  document.getElementById('coachNext').textContent=coachIdx===COACH.length-1?'Got it':'Next';
+  document.getElementById('coachDots').innerHTML=COACH.map((_,i)=>`<i class="${i===coachIdx?'on':''}"></i>`).join('');
+  if(el){
+    const r=el.getBoundingClientRect();
+    const spot=document.getElementById('coachSpot');
+    const pad=8;
+    spot.style.left=(r.left-pad)+'px';spot.style.top=(r.top-pad)+'px';
+    spot.style.width=(r.width+pad*2)+'px';spot.style.height=(r.height+pad*2)+'px';
+    const box=document.getElementById('coach');
+    const below=r.bottom+18, room=innerHeight-r.bottom;
+    box.style.left=Math.min(Math.max(12,r.left), innerWidth-320)+'px';
+    box.style.top=(room>220?below:Math.max(12,r.top-210))+'px';
+    el.scrollIntoView({block:'center',behavior:'smooth'});
+  }
+}
+function coachNextStep(){
+  if(coachIdx<COACH.length-1){coachIdx++;renderCoach()} else endCoach();
+}
+function endCoach(){
+  coachActive=false;
+  document.getElementById('coachVeil').classList.remove('on');
+  document.getElementById('coach').classList.remove('on');
+  document.getElementById('coachSpot').classList.remove('on');
+  try{localStorage.setItem('lgly-onboarded','1')}catch(e){}
+  const tgt=rowsEl.querySelector('.jrow:last-child .acct');if(tgt)tgt.focus({preventScroll:true});
+}
+addEventListener('resize',()=>{if(coachActive)renderCoach()});
+// mirror beam status to screen readers
+const _origWord=document.getElementById('beamWord');
+new MutationObserver(()=>{document.getElementById('srLive').textContent=_origWord.textContent}).observe(_origWord,{childList:true,characterData:true,subtree:true});
+
+ensureTAccount('Cash');ensureTAccount('Inventory — Coffee Beans');ensureTAccount('Accounts Payable');
+loadTxn(0);
+try{if(!localStorage.getItem('lgly-onboarded'))setTimeout(startCoach,700)}catch(e){}
+</script>
+<script>
+/* ════════ CHIC LAYER ════════ */
+(function(){
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce)return;
+
+  // cursor spotlight
+  var glow=document.createElement('div');glow.id='chicGlow';document.body.appendChild(glow);
+  var gx=innerWidth/2,gy=innerHeight/2,tx=gx,ty=gy;
+  addEventListener('pointermove',function(e){tx=e.clientX;ty=e.clientY;glow.style.opacity=1;},{passive:true});
+  (function loop(){gx+=(tx-gx)*.12;gy+=(ty-gy)*.12;glow.style.left=gx+'px';glow.style.top=gy+'px';requestAnimationFrame(loop);})();
+
+  // heading word-reveal: split the biggest heading on the page
+  var h=document.querySelector('h1, .s-head h2, .greeting h1, .lib-head h1, .fol-head h1, .rev-head h2, .hero h1');
+  if(h && !h.dataset.chicSplit){
+    h.dataset.chicSplit='1';
+    var walk=function(node){
+      [].slice.call(node.childNodes).forEach(function(n){
+        if(n.nodeType===3){ // text
+          var frag=document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach(function(w){
+            if(/^\s+$/.test(w)||w===''){frag.appendChild(document.createTextNode(w));return;}
+            var s=document.createElement('span');s.className='chic-word';s.textContent=w;frag.appendChild(s);
+          });
+          n.replaceWith(frag);
+        } else if(n.nodeType===1 && !/SVG/i.test(n.nodeName)){ walk(n); }
+      });
+    };
+    walk(h);
+    [].slice.call(h.querySelectorAll('.chic-word')).forEach(function(s,i){s.style.animationDelay=(i*55+80)+'ms';});
+  }
+
+  // entrance choreography: tag cards/sections, reveal on scroll
+  var sel='.card, .panel.on .page, .story-card, .receipt, .clue, .tacct, .sage, .acct-card, .stab, .proof, .cycle-strip, .final, .clue-card, .sage-strip, .posted, .entry-card, .deckcard, .streakcard, .dialcard, .sagecard, .casefile, .bs, .mid > *, .shelfcard, .notescard, .primer, .controls';
+  var nodes=[].slice.call(document.querySelectorAll(sel)).filter(function(n){return !n.closest('#chicGlow')});
+  // de-dupe nested
+  nodes=nodes.filter(function(n){return !nodes.some(function(m){return m!==n && m.contains(n)});});
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(en){
+      if(en.isIntersecting){
+        var el=en.target, idx=+el.dataset.chicI||0;
+        setTimeout(function(){el.classList.add('lit');},Math.min(idx*70,420));
+        io.unobserve(el);
+      }
+    });
+  },{threshold:.08,rootMargin:'0px 0px -6% 0px'});
+  nodes.forEach(function(n,i){n.classList.add('chic-in');if(n.matches('.card,.page,.clue-card,.story-card,.receipt,.tacct,.proof,.posted,.entry-card,.bs,.shelfcard,.notescard,.primer'))n.classList.add('chic-sheen');n.dataset.chicI=i%6;io.observe(n);});
+  // anything already in view at load: reveal immediately so nothing sits hidden behind the fold
+  requestAnimationFrame(function(){
+    nodes.forEach(function(n){var r=n.getBoundingClientRect();if(r.top<innerHeight*0.96){n.classList.add('lit');io.unobserve(n);}});
+  });
+
+
+  // magnetic buttons + ripple origin
+  [].slice.call(document.querySelectorAll('.btn-jade,.btn-ink,.btn-post,.cc-check,.btn')).forEach(function(b){
+    b.classList.add('chic-mag');
+    b.addEventListener('pointermove',function(e){
+      var r=b.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;
+      b.style.setProperty('--rx',(x/r.width*100)+'%');b.style.setProperty('--ry',(y/r.height*100)+'%');
+      b.style.transform='translate('+((x/r.width-.5)*5).toFixed(1)+'px,'+((y/r.height-.5)*5).toFixed(1)+'px)';
+    });
+    b.addEventListener('pointerleave',function(){b.style.transform='';});
+  });
+
+  // links get the underline-draw
+  [].slice.call(document.querySelectorAll('.spine nav a, .sage-link, .alink, .acctlink, .back')).forEach(function(a){a.classList.add('chic-u');});
+})();
+</script>
+</body>
+</html>
